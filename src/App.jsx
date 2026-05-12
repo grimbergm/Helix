@@ -586,113 +586,115 @@ function ShopScreen({ coins, onRedeem }) {
       </div>
   );
 }
-
 // ─── STATS SCREEN ─────────────────────────────────────────────────────────────
 function StatsScreen() {
-  const [energyInput, setEnergyInput] = useState(4);
-  const [energyData, setEnergyData] = useState(ENERGY_DATA);
+    const [energyInput, setEnergyInput] = useState(4);
+    const [energyData, setEnergyData] = useState(ENERGY_DATA);
 
-  const totalAvoided = WEEKLY_COINS.reduce((a, b) => a + (b.coins > 0 ? 60 : 0), 0);
-  const totalCoins = WEEKLY_COINS.reduce((a, b) => a + b.coins, 0);
-  const streak = 6;
+    const totalAvoided = WEEKLY_COINS.reduce((a, b) => a + (b.coins > 0 ? 60 : 0), 0);
+    const totalCoins = WEEKLY_COINS.reduce((a, b) => a + b.coins, 0);
+    const streak = 6;
 
-  const submitEnergy = (val) => {
-    setEnergyInput(val);
-    setEnergyData(prev => {
-      const copy = [...prev];
-      copy[copy.length - 1] = { ...copy[copy.length - 1], level: val };
-      return copy;
-    });
-  };
+    const submitEnergy = (val) => {
+        setEnergyInput(val);
+        setEnergyData(prev => {
+            const copy = [...prev];
+            copy[copy.length - 1] = { ...copy[copy.length - 1], level: val };
+            return copy;
+        });
+    };
 
-  const StatCard = ({ label, value, unit, color }) => (
-      <div style={{
-        background: "rgba(15,23,42,0.8)", border: "1px solid rgba(51,65,85,0.4)",
-        borderRadius: 16, padding: "16px",
-      }}>
-        <div style={{ fontSize: 11, color: "#475569", letterSpacing: 1, marginBottom: 6, fontFamily: "'DM Sans', sans-serif" }}>
-          {label}
-        </div>
-        <div style={{ fontSize: 28, fontWeight: 700, color: color || "#e2e8f0", fontFamily: "'Space Mono', monospace" }}>
-          {value}<span style={{ fontSize: 14, color: "#475569" }}>{unit}</span>
-        </div>
-      </div>
-  );
-
-  return (
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "20px", gap: 20, overflowY: "auto" }}>
-        <h2 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: "#e2e8f0", fontFamily: "'DM Sans', sans-serif" }}>
-          Sleep Impact
-        </h2>
-
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-          <StatCard label="BLUE LIGHT AVOIDED" value={totalAvoided} unit="min" color="#a78bfa" />
-          <StatCard label="COINS EARNED" value={totalCoins} unit="✦" color="#fbbf24" />
-          <StatCard label="BEST STREAK" value={streak} unit=" nights" color="#34d399" />
-          <StatCard label="AVG ENERGY" value={(energyData.reduce((a,b) => a + b.level, 0) / energyData.length).toFixed(1)} unit="/5" color="#60a5fa" />
-        </div>
-
-        {/* Coins chart */}
-        <div style={{ background: "rgba(15,23,42,0.8)", border: "1px solid rgba(51,65,85,0.4)", borderRadius: 16, padding: 16 }}>
-          <div style={{ fontSize: 11, color: "#475569", letterSpacing: 1, marginBottom: 12, fontFamily: "'DM Sans', sans-serif" }}>
-            COINS EARNED — THIS WEEK
-          </div>
-          <ResponsiveContainer width="100%" height={120}>
-            <BarChart data={WEEKLY_COINS} barSize={22}>
-              <XAxis dataKey="day" tick={{ fill: "#475569", fontSize: 10, fontFamily: "'DM Sans', sans-serif" }} axisLine={false} tickLine={false} />
-              <YAxis hide />
-              <Tooltip
-                  contentStyle={{ background: "rgba(15,10,40,0.95)", border: "1px solid rgba(99,102,241,0.3)", borderRadius: 10, color: "#e2e8f0" }}
-                  labelStyle={{ color: "#a78bfa" }}
-              />
-              <Bar dataKey="coins" radius={[6, 6, 0, 0]}>
-                {WEEKLY_COINS.map((entry, i) => (
-                    <Cell key={i} fill={entry.coins > 0 ? "#7c3aed" : "rgba(51,65,85,0.3)"} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Energy chart */}
-        <div style={{ background: "rgba(15,23,42,0.8)", border: "1px solid rgba(51,65,85,0.4)", borderRadius: 16, padding: 16 }}>
-          <div style={{ fontSize: 11, color: "#475569", letterSpacing: 1, marginBottom: 12, fontFamily: "'DM Sans', sans-serif" }}>
-            MORNING ENERGY LEVELS
-          </div>
-          <ResponsiveContainer width="100%" height={100}>
-            <BarChart data={energyData} barSize={22}>
-              <XAxis dataKey="day" tick={{ fill: "#475569", fontSize: 10 }} axisLine={false} tickLine={false} />
-              <YAxis hide domain={[0, 5]} />
-              <Bar dataKey="level" radius={[6, 6, 0, 0]}>
-                {energyData.map((entry, i) => (
-                    <Cell key={i} fill={`hsl(${entry.level * 30 + 120}, 60%, 50%)`} />
-                ))}
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
-          {/* Log today's energy */}
-          <div style={{ marginTop: 12, borderTop: "1px solid rgba(51,65,85,0.4)", paddingTop: 12 }}>
-            <div style={{ fontSize: 11, color: "#475569", marginBottom: 10, fontFamily: "'DM Sans', sans-serif" }}>
-              Log today's morning energy:
+    const StatCard = ({ label, value, unit, color }) => (
+        <div style={{
+            background: "rgba(15,23,42,0.8)", border: "1px solid rgba(51,65,85,0.4)",
+            borderRadius: 16, padding: "16px",
+        }}>
+            <div style={{ fontSize: 11, color: "#475569", letterSpacing: 1, marginBottom: 6, fontFamily: "'DM Sans', sans-serif" }}>
+                {label}
             </div>
-            <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
-              {[1, 2, 3, 4, 5].map(v => (
-                  <button key={v} onClick={() => submitEnergy(v)} style={{
-                    width: 40, height: 40, borderRadius: 12, border: "none",
-                    background: energyInput === v ? "rgba(99,102,241,0.3)" : "rgba(51,65,85,0.3)",
-                    color: energyInput === v ? "#a78bfa" : "#64748b",
-                    fontSize: 16, cursor: "pointer", fontWeight: 700
-                  }}>
-                    {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
-                  </button>
-              ))}
+            <div style={{ fontSize: 28, fontWeight: 700, color: color || "#e2e8f0", fontFamily: "'Space Mono', monospace" }}>
+                {value}<span style={{ fontSize: 14, color: "#475569" }}>{unit}</span>
             </div>
-          </div>
         </div>
-      </div>
-  );
+    );
+
+    return (
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "20px", gap: 20, overflowY: "auto" }}>
+            <h2 style={{ margin: 0, fontSize: 22, fontWeight: 800, color: "#e2e8f0", fontFamily: "'DM Sans', sans-serif" }}>
+                Sleep Impact
+            </h2>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <StatCard label="BLUE LIGHT AVOIDED" value={totalAvoided} unit="min" color="#a78bfa" />
+                <StatCard label="COINS EARNED" value={totalCoins} unit="✦" color="#fbbf24" />
+                <StatCard label="BEST STREAK" value={streak} unit=" nights" color="#34d399" />
+                <StatCard label="AVG ENERGY" value={(energyData.reduce((a,b) => a + b.level, 0) / energyData.length).toFixed(1)} unit="/5" color="#60a5fa" />
+            </div>
+
+            {/* Coins chart */}
+            <div style={{ background: "rgba(15,23,42,0.8)", border: "1px solid rgba(51,65,85,0.4)", borderRadius: 16, padding: 16, minHeight: "180px" }}>
+                <div style={{ fontSize: 11, color: "#475569", letterSpacing: 1, marginBottom: 12, fontFamily: "'DM Sans', sans-serif" }}>
+                    COINS EARNED — THIS WEEK
+                </div>
+                <div style={{ width: '100%', height: 120 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={WEEKLY_COINS}>
+                            <XAxis dataKey="day" tick={{ fill: "#475569", fontSize: 10, fontFamily: "'DM Sans', sans-serif" }} axisLine={false} tickLine={false} />
+                            <YAxis hide />
+                            <Tooltip
+                                contentStyle={{ background: "rgba(15,10,40,0.95)", border: "1px solid rgba(99,102,241,0.3)", borderRadius: 10, color: "#e2e8f0" }}
+                                labelStyle={{ color: "#a78bfa" }}
+                            />
+                            <Bar dataKey="coins" radius={[6, 6, 0, 0]}>
+                                {WEEKLY_COINS.map((entry, i) => (
+                                    <Cell key={i} fill={entry.coins > 0 ? "#7c3aed" : "rgba(51,65,85,0.3)"} />
+                                ))}
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+            </div>
+
+            {/* Energy chart */}
+            <div style={{ background: "rgba(15,23,42,0.8)", border: "1px solid rgba(51,65,85,0.4)", borderRadius: 16, padding: 16 }}>
+                <div style={{ fontSize: 11, color: "#475569", letterSpacing: 1, marginBottom: 12, fontFamily: "'DM Sans', sans-serif" }}>
+                    MORNING ENERGY LEVELS
+                </div>
+                <div style={{ width: '100%', height: 100 }}>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart data={energyData} barSize={22}>
+                            <XAxis dataKey="day" tick={{ fill: "#475569", fontSize: 10 }} axisLine={false} tickLine={false} />
+                            <YAxis hide domain={[0, 5]} />
+                            <Bar dataKey="level" radius={[6, 6, 0, 0]}>
+                                {energyData.map((entry, i) => (
+                                    <Cell key={i} fill={`hsl(${entry.level * 30 + 120}, 60%, 50%)`} />
+                                ))}
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
+                </div>
+
+                <div style={{ marginTop: 12, borderTop: "1px solid rgba(51,65,85,0.4)", paddingTop: 12 }}>
+                    <div style={{ fontSize: 11, color: "#475569", marginBottom: 10, fontFamily: "'DM Sans', sans-serif" }}>
+                        Log today's morning energy:
+                    </div>
+                    <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+                        {[1, 2, 3, 4, 5].map(v => (
+                            <button key={v} onClick={() => submitEnergy(v)} style={{
+                                width: 40, height: 40, borderRadius: 12, border: "none",
+                                background: energyInput === v ? "rgba(99,102,241,0.3)" : "rgba(51,65,85,0.3)",
+                                color: energyInput === v ? "#a78bfa" : "#64748b",
+                                fontSize: 16, cursor: "pointer", fontWeight: 700
+                            }}>
+                                {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }
-
 // ─── PROFILE SCREEN ──────────────────────────────────────────────────────────
 function ProfileScreen({ coins, onReset }) {
   const rows = [
