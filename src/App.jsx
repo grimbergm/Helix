@@ -146,24 +146,6 @@ function CountdownTimer({ seconds, total }) {
   );
 }
 
-// ─── STATUS BAR ──────────────────────────────────────────────────────────────
-function StatusBar() {
-  const now = new Date();
-  const h = now.getHours().toString().padStart(2, "0");
-  const m = now.getMinutes().toString().padStart(2, "0");
-  return (
-      <div style={{
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "10px 20px 6px", fontSize: 12, color: "rgba(226,232,240,0.6)",
-        fontFamily: "'DM Sans', sans-serif"
-      }}>
-        <span style={{ fontWeight: 600 }}>{h}:{m}</span>
-        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
-          <Signal size={12} /><Wifi size={12} /><Battery size={14} />
-        </div>
-      </div>
-  );
-}
 
 // ─── COIN BADGE ──────────────────────────────────────────────────────────────
 function CoinBadge({ amount, size = "sm" }) {
