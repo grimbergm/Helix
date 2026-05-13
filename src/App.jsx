@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Moon, Star, Coins, ShoppingBag, BarChart2, User, Flame, Zap, Award, ChevronRight, Check, ArrowLeft, Sun, Coffee, Leaf, Heart, Clock, TrendingUp, Calendar, Bell, Settings, Gift, X, Play, Pause, SkipForward, Battery, Wifi, Signal } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Cell } from "recharts";
+import helixLogo from "./assets/Helix_logo.jpeg";
 
 const BLUE_LIGHT_FACTS = [
     "Blue light suppresses melatonin production for up to 3 hours after exposure.",
@@ -59,6 +60,51 @@ function useVisibilityTracking(active) {
     }, [active]);
     return { penalized, warningVisible, resetPenalty: () => setPenalized(false) };
 }
+
+// ─── WELCOME SCREEN ───────────────────────────────────────────────────────────
+function WelcomeScreen({ onNext }) {
+    return (
+        <div style={{
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#522e1e",
+            height: "100vh",
+            padding: "24px",
+            textAlign: "center"
+        }}>
+            {/* הצגת הלוגו */}
+            <div style={{ marginBottom: "40px" }}>
+                <img
+                    src={helixLogo}
+                    alt="Helix Logo"
+                    style={{ width: "240px", height: "auto" }}
+                />
+            </div>
+
+            {/* כפתור כניסה בסגנון היוקרתי שלכם */}
+            <button
+                onClick={onNext}
+                style={{
+                    padding: "16px 48px",
+                    borderRadius: "30px",
+                    border: "1px solid #a39171",
+                    background: "transparent",
+                    color: "#e5d3b3",
+                    fontSize: "18px",
+                    fontFamily: "'Playfair Display', serif",
+                    cursor: "pointer",
+                    marginTop: "20px"
+                }}
+            >
+                Start Journey
+            </button>
+        </div>
+    );
+}
+
 
 // ─── BREATHING RING ───────────────────────────────────────────────────────────
 function BreathingRing({ progress, phase }) {
@@ -681,6 +727,7 @@ function ProfileScreen({ coins, onReset }) {
 
 // ─── ROOT APP ────────────────────────────────────────────────────────────────
 export default function HelixApp() {
+    const [showSplash, setShowSplash] = useState(true);
     const [configured, setConfigured] = useState(false);
     const [config, setConfig] = useState({ bedtime: "22:30", duration: 60 });
     const [tab, setTab] = useState("home");
@@ -735,7 +782,10 @@ export default function HelixApp() {
         }}>
             <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400&display=swap" rel="stylesheet" />
 
-            {!configured ? (
+            {/* ADD THIS CONDITIONAL CHECK HERE */}
+            {showSplash ? (
+                <WelcomeScreen onNext={() => setShowSplash(false)} />
+            ) : !configured ? (
                 <SetupWizard onComplete={(cfg) => { setConfig(cfg); setConfigured(true); }} />
             ) : (
                 <>
