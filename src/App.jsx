@@ -789,10 +789,19 @@ export default function HelixApp() {
 
     return (
         <div style={{
-            width: "100%", maxWidth: 420, margin: "0 auto", minHeight: "100vh",
+            width: "100%",
+            maxWidth: 412, // Standard mobile device max width
+            margin: "0 auto",
+            height: "100vh", // Forces absolute match to viewport height
+            maxHeight: "892px", // Fixes height to standard iPhone 15/Pro scale
             background: "linear-gradient(170deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%)",
-            display: "flex", flexDirection: "column", position: "relative", overflow: "hidden",
-            fontFamily: "'Inter', sans-serif", fontWeight: "200"
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+            overflow: "hidden", // Completely blocks page leakage
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: "200",
+            border: "1px solid rgba(163, 145, 113, 0.1)" // Clean bounding phone line
         }}>
             <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400&display=swap" rel="stylesheet" />
 
@@ -802,7 +811,15 @@ export default function HelixApp() {
                 <SetupWizard onComplete={(cfg) => { setConfig(cfg); setConfigured(true); }} />
             ) : (
                 <>
-                    <div style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: "auto" }}>
+
+                    <div style={{
+                        flex: 1,
+                        display: "flex",
+                        flexDirection: "column",
+                        height: "calc(100% - 60px)",
+                        overflowY: "auto",
+                        WebkitOverflowScrolling: "touch"
+                    }}>
                         {tab === "home" && (
                             <HomeScreen
                                 config={config} coins={coins} onStart={handleStart} sessionActive={sessionActive}
