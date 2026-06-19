@@ -70,12 +70,11 @@ function WelcomeScreen({ onNext }) {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "#522e1e",
+            background: "#522E1E",
             height: "100vh",
             padding: "24px",
             textAlign: "center"
         }}>
-            {/* הצגת הלוגו */}
             <div style={{ marginBottom: "40px" }}>
                 <img
                     src={helixLogo}
@@ -84,7 +83,6 @@ function WelcomeScreen({ onNext }) {
                 />
             </div>
 
-            {/* כפתור כניסה בסגנון היוקרתי שלכם */}
             <button
                 onClick={onNext}
                 style={{
@@ -104,7 +102,6 @@ function WelcomeScreen({ onNext }) {
         </div>
     );
 }
-
 
 // ─── BREATHING RING ───────────────────────────────────────────────────────────
 function BreathingRing({ progress, phase }) {
@@ -552,9 +549,10 @@ function ShopScreen({ coins, onRedeem }) {
 }
 
 // ─── STATS SCREEN ─────────────────────────────────────────────────────────────
-function StatsScreen() {
+function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
     const [energyInput, setEnergyInput] = useState(4);
     const [energyData, setEnergyData] = useState(ENERGY_DATA);
+    const [earnedTonight, setEarnedTonight] = useState(0);
 
     const totalAvoided = WEEKLY_COINS.reduce((a, b) => a + (b.coins > 0 ? 60 : 0), 0);
     const totalCoins = WEEKLY_COINS.reduce((a, b) => a + b.coins, 0);
@@ -567,6 +565,17 @@ function StatsScreen() {
             copy[copy.length - 1] = { ...copy[copy.length - 1], level: val };
             return copy;
         });
+
+        if (sleepStartTime) {
+            const wakeTime = new Date();
+            const differenceInMs = wakeTime - sleepStartTime;
+            const hoursSlept = differenceInMs / (1000 * 60 * 60);
+            const coinsEarned = Math.max(1, Math.floor(hoursSlept * 50));
+
+            setCoins(prevCoins => prevCoins + coinsEarned);
+            setEarnedTonight(coinsEarned);
+            setSleepStartTime(null);
+        }
     };
 
     const StatCard = ({ label, value, unit }) => (
@@ -585,7 +594,16 @@ function StatsScreen() {
         <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px", gap: 20, overflowY: "auto" }}>
             <h2 style={{ margin: 0, fontSize: 28, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Sleep Impact</h2>
 
-            {/* Summary Grid */}
+            {earnedTonight > 0 && (
+                <div style={{
+                    background: "rgba(212, 175, 55, 0.1)", border: "1px solid #d4af37",
+                    borderRadius: 16, padding: "14px", color: "#e5d3b3", textAlignment: "center",
+                    fontFamily: "'Playfair Display', serif", letterSpacing: "1px"
+                }}>
+                    ✨ MORNING HARVEST: +{earnedTonight} HELIX COINS ADDED TO YOUR WALLET
+                </div>
+            )}
+
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 <StatCard label="BLUE LIGHT AVOIDED" value={totalAvoided} unit="min" />
                 <StatCard label="HELIX COINS EARNED" value={totalCoins} unit="✦" />
@@ -593,7 +611,6 @@ function StatsScreen() {
                 <StatCard label="AVG ENERGY" value={(energyData.reduce((a,b) => a + b.level, 0) / energyData.length).toFixed(1)} unit="/5" />
             </div>
 
-            {/* Coins Chart */}
             <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: 20, padding: 20, height: 220 }}>
                 <div style={{ fontSize: 11, color: "#a39171", marginBottom: 20, letterSpacing: 1 }}>
                     COINS EARNED — THIS WEEK
@@ -618,7 +635,6 @@ function StatsScreen() {
                 </div>
             </div>
 
-            {/* Energy Chart & Logger */}
             <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: 20, padding: 20 }}>
                 <div style={{ fontSize: 11, color: "#a39171", marginBottom: 20, letterSpacing: 1 }}>
                     MORNING ENERGY LEVELS
@@ -630,7 +646,6 @@ function StatsScreen() {
                             <YAxis hide domain={[0, 5]} />
                             <Bar dataKey="level" radius={[6, 6, 0, 0]}>
                                 {energyData.map((entry, i) => (
-                                    // Removed the purple HSL; using a bronze-to-gold gradient based on energy level
                                     <Cell key={i} fill={entry.level >= 4 ? "#d4af37" : "#a39171"} fillOpacity={0.4 + (entry.level * 0.12)} />
                                 ))}
                             </Bar>
@@ -659,6 +674,7 @@ function StatsScreen() {
         </div>
     );
 }
+
 // ─── PROFILE SCREEN ──────────────────────────────────────────────────────────
 function ProfileScreen({ coins, onReset }) {
     const rows = [
@@ -683,7 +699,6 @@ function ProfileScreen({ coins, onReset }) {
                 <CoinBadge amount={coins} size="lg" />
             </div>
 
-            {/* Stats rows */}
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {rows.map((row, i) => (
                     <div key={i} style={{
@@ -700,7 +715,6 @@ function ProfileScreen({ coins, onReset }) {
                 ))}
             </div>
 
-            {/* Settings */}
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {["Notifications", "Privacy", "About Helix"].map((label, i) => (
                     <button key={i} style={{
@@ -736,6 +750,9 @@ export default function HelixApp() {
     const [sessionSeconds, setSessionSeconds] = useState(0);
     const [factIndex, setFactIndex] = useState(0);
 
+    // Fixed: Properly declared internal component state
+    const [sleepStartTime, setSleepStartTime] = useState(null);
+
     const sessionTotal = config.duration * 60;
     const { penalized, warningVisible, resetPenalty } = useVisibilityTracking(sessionActive);
 
@@ -746,7 +763,6 @@ export default function HelixApp() {
             setSessionSeconds(prev => {
                 if (prev <= 1) {
                     setSessionActive(false);
-                    if (!penalized) setCoins(c => c + config.duration);
                     return 0;
                 }
                 return prev - 1;
@@ -764,13 +780,11 @@ export default function HelixApp() {
     const handleStart = () => {
         resetPenalty();
         setSessionActive(true);
+        setSleepStartTime(new Date());
     };
 
     const handleStop = () => {
         setSessionActive(false);
-        const elapsed = sessionTotal - sessionSeconds;
-        const earned = Math.floor((elapsed / sessionTotal) * config.duration);
-        if (earned > 0) setCoins(c => c + earned);
     };
 
     return (
@@ -782,7 +796,6 @@ export default function HelixApp() {
         }}>
             <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400&display=swap" rel="stylesheet" />
 
-            {/* ADD THIS CONDITIONAL CHECK HERE */}
             {showSplash ? (
                 <WelcomeScreen onNext={() => setShowSplash(false)} />
             ) : !configured ? (
@@ -798,7 +811,13 @@ export default function HelixApp() {
                             />
                         )}
                         {tab === "shop" && <ShopScreen coins={coins} onRedeem={(cost) => setCoins(c => c - cost)} />}
-                        {tab === "stats" && <StatsScreen />}
+                        {tab === "stats" && (
+                            <StatsScreen
+                                sleepStartTime={sleepStartTime}
+                                setSleepStartTime={setSleepStartTime}
+                                setCoins={setCoins}
+                            />
+                        )}
                         {tab === "profile" && <ProfileScreen coins={coins} onReset={() => setConfigured(false)} />}
                     </div>
                     <TabBar active={tab} onChange={setTab} />
