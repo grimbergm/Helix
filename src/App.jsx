@@ -206,7 +206,7 @@ function CoinBadge({ amount, size = "sm" }) {
                 fontSize: isLg ? 20 : 13, fontWeight: 300,
                 color: "#d4af37", fontFamily: "'Inter', sans-serif"
             }}>{amount}</span>
-            {isLg && <span style={{ fontSize: 11, color: "rgba(163, 145, 113, 0.6)", letterSpacing: 1, marginLeft: 4 }}>HELIX</span>}
+            {isLg && <span style={{ fontSize: 11, color: "#a39171", fontWeight: "500", letterSpacing: 1.5, marginLeft: "6px" }}>HELIX</span>}
         </div>
     );
 }
