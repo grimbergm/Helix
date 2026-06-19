@@ -169,7 +169,7 @@ function CountdownTimer({ seconds, total }) {
             <div style={{
                 fontFamily: "'Playfair Display', serif",
                 fontSize: 52,
-                fontWeight: 400,
+                fontWeight: 550,
                 color: "#e5d3b3",
                 letterSpacing: 2,
                 lineHeight: 1
@@ -307,7 +307,7 @@ function SetupWizard({ onComplete }) {
                     <div style={{ fontSize: 64, marginBottom: 16 }}>🌙</div>
                     <div style={{ color: "#a39171", fontSize: 15, lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
                         Your pre-sleep routine starts at<br />
-                        <span style={{ color: "#e5d3b3", fontWeight: 400, fontSize: 24, fontFamily: "'Playfair Display', serif" }}>
+                        <span style={{ color: "#e5d3b3", fontWeight: 550, fontSize: 24, fontFamily: "'Playfair Display', serif" }}>
               {(() => {
                   const [h, m] = bedtime.split(":").map(Number);
                   const total = h * 60 + m - duration;
@@ -335,7 +335,7 @@ function SetupWizard({ onComplete }) {
             </div>
 
             <div>
-                <h2 style={{ margin: "0 0 8px", fontSize: 32, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+                <h2 style={{ margin: "0 0 8px", fontSize: 32, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     {steps[step].title}
                 </h2>
                 <p style={{ margin: 0, color: "#a39171", fontSize: 14, letterSpacing: 1 }}>{steps[step].sub}</p>
@@ -420,7 +420,7 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
         <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "30px 24px", gap: 24 }}>
             <div>
                 <div style={{ fontSize: 14, color: "#a39171", fontFamily: "'Inter', sans-serif" }}>Good evening 🌙</div>
-                <h1 style={{ margin: "6px 0 0", fontSize: 34, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+                <h1 style={{ margin: "6px 0 0", fontSize: 34, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     Ready to Unwind?
                 </h1>
             </div>
@@ -459,14 +459,14 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
             }}>
                 <div style={{ textAlign: "center" }}>
                     <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif" }}>BEDTIME</div>
-                    <div style={{ fontSize: 18, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
+                    <div style={{ fontSize: 18, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
                         {config.bedtime}
                     </div>
                 </div>
                 <div style={{ width: 1, background: "rgba(51,65,85,0.4)" }} />
                 <div style={{ textAlign: "center" }}>
                     <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif" }}>WIND-DOWN</div>
-                    <div style={{ fontSize: 18, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
+                    <div style={{ fontSize: 18, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
                         {config.duration}m
                     </div>
                 </div>
@@ -510,7 +510,7 @@ function ShopScreen({ coins, onRedeem }) {
     return (
         <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px" }}>
             <div style={{ marginBottom: 20 }}>
-                <h2 style={{ margin: "0 0 4px", fontSize: 28, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+                <h2 style={{ margin: "0 0 4px", fontSize: 28, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     Wellness Market
                 </h2>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -527,7 +527,7 @@ function ShopScreen({ coins, onRedeem }) {
                         opacity: redeemed.has(item.id) ? 0.4 : 1,
                     }}>
                         <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
-                        <div style={{ fontSize: 13, fontWeight: 400, color: "#e5d3b3", marginBottom: 6 }}>
+                        <div style={{ fontSize: 13, fontWeight: 550, color: "#e5d3b3", marginBottom: 6 }}>
                             {item.name}
                         </div>
                         <div style={{
@@ -584,7 +584,7 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
             borderRadius: 20, padding: "18px",
         }}>
             <div style={{ fontSize: 10, color: "#a39171", letterSpacing: 1, marginBottom: 8 }}>{label}</div>
-            <div style={{ fontSize: 24, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+            <div style={{ fontSize: 24, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                 {value}<span style={{ fontSize: 12, color: "#a39171", marginLeft: 4 }}>{unit}</span>
             </div>
         </div>
@@ -592,7 +592,7 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
 
     return (
         <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px", gap: 20, overflowY: "auto" }}>
-            <h2 style={{ margin: 0, fontSize: 28, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Sleep Impact</h2>
+            <h2 style={{ margin: 0, fontSize: 28, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Sleep Impact</h2>
 
             {earnedTonight > 0 && (
                 <div style={{
@@ -693,7 +693,7 @@ function ProfileScreen({ coins, onReset }) {
                     fontSize: 42, boxShadow: "0 0 40px rgba(163, 145, 113, 0.2)"
                 }}>🌙</div>
                 <div style={{ textAlign: "center" }}>
-                    <h3 style={{ margin: "0 0 4px", fontSize: 24, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Helix User</h3>
+                    <h3 style={{ margin: "0 0 4px", fontSize: 24, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Helix User</h3>
                     <p style={{ margin: 0, color: "#a39171", fontSize: 13, letterSpacing: 1 }}>Joined May 2025</p>
                 </div>
                 <CoinBadge amount={coins} size="lg" />
