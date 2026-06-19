@@ -265,14 +265,21 @@ function SetupWizard({ onComplete }) {
             title: "When do you sleep?",
             sub: "Set your target bedtime",
             content: (
-                <div style={{ textAlign: "center" }}>
+                <div style={{
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    boxSizing: "border-box",
+                    padding: "0 10px" }}>
                     <input type="time" value={bedtime} onChange={e => setBedtime(e.target.value)}
                            style={{
                                background: "rgba(44, 24, 16, 0.4)",
                                border: "1px solid rgba(163, 145, 113, 0.2)",
                                borderRadius: 16, padding: "20px", fontSize: 42,
                                color: "#e5d3b3", fontFamily: "'Playfair Display', serif",
-                               outline: "none", textAlign: "center", width: "100%", boxSizing: "border-box"
+                               outline: "none", textAlign: "center", width: "100%", boxSizing: "border-box", display: "block",
+                               margin: "0 auto"
                            }} />
                 </div>
             )
