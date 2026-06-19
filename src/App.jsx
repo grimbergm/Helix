@@ -336,19 +336,22 @@ function SetupWizard({ onComplete }) {
 
     return (
         <div style={{
-            padding: "30px 24px 40px",
+            padding: "40px 24px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            gap: 20,
+            alignItems: "stretch",
+            height: "100%",
+            boxSizing: "border-box",
             flex: 1
         }}>
             {/* Barra de progreso */}
-            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
+            <div style={{ display: "flex", gap: 10, justifyContent: "center", marginBottom: 10 }}>
                 {/* ... mapping de los puntitos */}
             </div>
 
-            <div style={{ marginTop: 10 }}>
+            {/* Bloque de Título y Subtítulo */}
+            <div style={{ textAlign: "center", marginBottom: 20 }}>
                 <h2 style={{ margin: "0 0 8px", fontSize: 32, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     {steps[step].title}
                 </h2>
@@ -357,15 +360,18 @@ function SetupWizard({ onComplete }) {
                 </p>
             </div>
 
+            {/* Bloque Central - Input de hora o botones */}
             <div style={{
                 flex: 1,
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                margin: "40px 0"
             }}>
                 <div style={{ width: "100%" }}>{steps[step].content}</div>
             </div>
 
+            {/* Botón de acción */}
             <button onClick={() => step < steps.length - 1 ? setStep(step + 1) : onComplete({ bedtime, duration })}
                     style={{
                         padding: "18px", borderRadius: 16, cursor: "pointer",
@@ -376,7 +382,8 @@ function SetupWizard({ onComplete }) {
                         textTransform: "uppercase",
                         letterSpacing: "3px",
                         fontSize: 14,
-                        width: "100%"
+                        width: "100%",
+                        marginTop: "auto"
                     }}>
                 {step < steps.length - 1 ? "Next Step" : "Begin Routine ✦"}
             </button>
@@ -822,18 +829,19 @@ export default function HelixApp() {
     return (
         <div style={{
             width: "100%",
-            maxWidth: 412, // Standard mobile device max width
+            maxWidth: 420,
             margin: "0 auto",
             minHeight: "100dvh",
-            height: "100dvh", // Forces absolute match to viewport height
+            height: "100dvh",
             background: "linear-gradient(170deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%)",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "space-between",
             position: "relative",
             overflow: "hidden", // Completely blocks page leakage
             fontFamily: "'Inter', sans-serif",
             fontWeight: "200",
-            border: "1px solid rgba(163, 145, 113, 0.1)" // Clean bounding phone line
+            boxSizing: "border-box"
         }}>
             <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400&display=swap" rel="stylesheet" />
 
