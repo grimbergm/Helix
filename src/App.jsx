@@ -304,10 +304,12 @@ function SetupWizard({ onComplete }) {
             sub: "Helix will reward your rest",
             content: (
                 <div style={{ textAlign: "center", padding: "20px 0" }}>
-                    <div style={{ fontSize: 64, marginBottom: 16 }}>🌙</div>
-                    <div style={{ color: "#a39171", fontSize: 15, lineHeight: 1.6, fontFamily: "'Inter', sans-serif" }}>
+                    <div style={{ fontSize: 64, marginBottom: "32px", display: "block" }}>🌙</div>
+                    <div style={{ color: "#a39171", fontSize: 15, lineHeight: 1.8, fontFamily: "'Inter', sans-serif", fontWeight: "500",
+                        letterSpacing: "0.5px",
+                        marginBottom: "16px" }}>
                         Your pre-sleep routine starts at<br />
-                        <span style={{ color: "#e5d3b3", fontWeight: 550, fontSize: 24, fontFamily: "'Playfair Display', serif" }}>
+                        <span style={{ color: "#e5d3b3", fontWeight: 400, fontSize: 32, fontFamily: "'Playfair Display', serif", display: "block" }}>
               {(() => {
                   const [h, m] = bedtime.split(":").map(Number);
                   const total = h * 60 + m - duration;
