@@ -419,7 +419,7 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
     return (
         <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "30px 24px", gap: 24 }}>
             <div>
-                <div style={{ fontSize: 14, color: "#a39171", fontFamily: "'Inter', sans-serif" }}>Good evening 🌙</div>
+                <div style={{ fontSize: 14, color: "#a39171", fontFamily: "'Inter', sans-serif", fontWeight: 550  }}>Good evening 🌙</div>
                 <h1 style={{ margin: "6px 0 0", fontSize: 34, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     Ready to Unwind?
                 </h1>
@@ -430,7 +430,7 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
                 border: "1px solid rgba(163, 145, 113, 0.15)",
                 borderRadius: 24, padding: "24px",
             }}>
-                <div style={{ fontSize: 11, color: "#a39171", letterSpacing: 2, marginBottom: 10 }}>YOUR BALANCE
+                <div style={{ fontSize: 11, color: "#a39171", letterSpacing: 2, marginBottom: 10, fontWeight: 550 }}>YOUR BALANCE
                 </div>
                 <CoinBadge amount={coins} size="lg" />
             </div>
@@ -458,21 +458,21 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
                 display: "flex", justifyContent: "space-between"
             }}>
                 <div style={{ textAlign: "center" }}>
-                    <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif" }}>BEDTIME</div>
+                    <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif", fontWeight: 550  }}>BEDTIME</div>
                     <div style={{ fontSize: 18, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
                         {config.bedtime}
                     </div>
                 </div>
                 <div style={{ width: 1, background: "rgba(51,65,85,0.4)" }} />
                 <div style={{ textAlign: "center" }}>
-                    <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif" }}>WIND-DOWN</div>
+                    <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif", fontWeight: 550  }}>WIND-DOWN</div>
                     <div style={{ fontSize: 18, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
                         {config.duration}m
                     </div>
                 </div>
                 <div style={{ width: 1, background: "rgba(51,65,85,0.4)" }} />
                 <div style={{ textAlign: "center" }}>
-                    <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif" }}>REWARD</div>
+                    <div style={{ fontSize: 10, color: "#475569", fontFamily: "'DM Sans', sans-serif", fontWeight: 550  }}>REWARD</div>
                     <div style={{ fontSize: 18, fontWeight: 700, color: "#fbbf24", fontFamily: "'Space Mono', monospace" }}>
                         +{config.duration}✦
                     </div>
