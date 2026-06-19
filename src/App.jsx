@@ -323,25 +323,36 @@ function SetupWizard({ onComplete }) {
     ];
 
     return (
-        <div style={{ padding: "40px 24px", display: "flex", flexDirection: "column", gap: 32, flex: 1 }}>
+        <div style={{
+            padding: "30px 24px 40px",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            gap: 20,
+            flex: 1
+        }}>
+            {/* Barra de progreso */}
             <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-                {steps.map((_, i) => (
-                    <div key={i} style={{
-                        width: i === step ? 30 : 8, height: 3, borderRadius: 10,
-                        background: i <= step ? "#d4af37" : "rgba(163, 145, 113, 0.2)",
-                        transition: "all 0.5s"
-                    }} />
-                ))}
+                {/* ... mapping de los puntitos */}
             </div>
 
-            <div>
-                <h2 style={{ margin: "0 0 8px", fontSize: 32, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+            <div style={{ marginTop: 10 }}>
+                <h2 style={{ margin: "0 0 8px", fontSize: 32, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     {steps[step].title}
                 </h2>
-                <p style={{ margin: 0, color: "#a39171", fontWeight: "500", fontSize: 14, letterSpacing: 1, fontFamily: "'Inter', sans-serif", }}>{steps[step].sub}</p>
+                <p style={{ margin: 0, color: "#a39171", fontSize: 14, fontWeight: "500", letterSpacing: "0.5px" }}>
+                    {steps[step].sub}
+                </p>
             </div>
 
-            <div style={{ flex: 1 }}>{steps[step].content}</div>
+            <div style={{
+                flex: 1,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }}>
+                <div style={{ width: "100%" }}>{steps[step].content}</div>
+            </div>
 
             <button onClick={() => step < steps.length - 1 ? setStep(step + 1) : onComplete({ bedtime, duration })}
                     style={{
@@ -352,9 +363,10 @@ function SetupWizard({ onComplete }) {
                         fontFamily: "'Playfair Display', serif",
                         textTransform: "uppercase",
                         letterSpacing: "3px",
-                        fontSize: 14
+                        fontSize: 14,
+                        width: "100%"
                     }}>
-                {step < steps.length - 1 ? "Continue" : "Start sleeping better ✦"}
+                {step < steps.length - 1 ? "Next Step" : "Begin Routine ✦"}
             </button>
         </div>
     );
@@ -800,8 +812,8 @@ export default function HelixApp() {
             width: "100%",
             maxWidth: 412, // Standard mobile device max width
             margin: "0 auto",
-            height: "100vh", // Forces absolute match to viewport height
-            maxHeight: "892px", // Fixes height to standard iPhone 15/Pro scale
+            minHeight: "100dvh",
+            height: "100dvh", // Forces absolute match to viewport height
             background: "linear-gradient(170deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%)",
             display: "flex",
             flexDirection: "column",
