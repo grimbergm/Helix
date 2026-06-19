@@ -626,23 +626,27 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
 
     const StatCard = ({ label, value, unit }) => (
         <div style={{
-            background: "rgba(44, 24, 16, 0.5)", border: "1px solid rgba(163, 145, 113, 0.15)",
-            borderRadius: 20, padding: "18px",
+            background: "rgba(44, 24, 16, 0.5)",
+            border: "1px solid rgba(163, 145, 113, 0.15)",
+            borderRadius: "20px",
+            padding: "18px",
+            boxSizing: "border-box"
         }}>
+            {/* 🌟 AQUÍ CORREGIMOS EL INPUT DE COLOR ELIMINANDO EL !IMPORTANT SINTÁCTICO 🌟 */}
             <div style={{
-                fontSize: 10,
+                fontSize: "11px",
                 color: "#a39171",
                 fontWeight: "600",
                 letterSpacing: "1.5px",
-                marginBottom: 8,
+                marginBottom: "8px",
                 fontFamily: "'Inter', sans-serif",
-                display: "block",
-                opacity: 1
+                display: "block"
             }}>
-
+                {label}
             </div>
-            <div style={{ fontSize: 24, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
-                {value}<span style={{ fontSize: 12, color: "#a39171", marginLeft: 4 }}>{unit}</span>
+
+            <div style={{ fontSize: "24px", fontWeight: "400", color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+                {value}<span style={{ fontSize: "12px", color: "#a39171", marginLeft: "4px" }}>{unit}</span>
             </div>
         </div>
     );
@@ -668,9 +672,19 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
                 <StatCard label="AVG ENERGY" value={(energyData.reduce((a,b) => a + b.level, 0) / energyData.length).toFixed(1)} unit="/5" />
             </div>
 
-            <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: 20, padding: 20, height: 220 }}>
-                <div style={{ fontSize: "11px", color: "#a39171", fontWeight: "600", marginBottom: 20, letterSpacing: 1.5, fontFamily: "'Inter', sans-serif", display: "block",
-                    opacity: 1 }}>
+            {/* Coins Chart */}
+            <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", height: "220px", boxSizing: "border-box" }}>
+
+                {/* 🌟 TEXTO SÓLIDO EN LUGAR DE SINTAXIS CSS PRORROTIADA 🌟 */}
+                <div style={{
+                    fontSize: "11px",
+                    color: "#a39171",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    letterSpacing: "1.5px",
+                    fontFamily: "'Inter', sans-serif",
+                    display: "block"
+                }}>
                     COINS EARNED — THIS WEEK
                 </div>
                 <div style={{ width: '100%', height: 140 }}>
@@ -693,11 +707,22 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
                 </div>
             </div>
 
-            <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: 20, padding: 20 }}>
-                <div style={{ fontSize: 11, color: "#a39171", marginBottom: 20, letterSpacing: 1 }}>
+            {/* Energy Chart */}
+            <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", boxSizing: "border-box" }}>
+
+                {/* 🌟 CORRECCIÓN DEL TÍTULO DE ENERGÍA 🌟 */}
+                <div style={{
+                    fontSize: "11px",
+                    color: "#a39171",
+                    fontWeight: "600",
+                    marginBottom: "20px",
+                    letterSpacing: "1.5px",
+                    fontFamily: "'Inter', sans-serif",
+                    display: "block"
+                }}>
                     MORNING ENERGY LEVELS
                 </div>
-                <div style={{ width: '100%', height: 120 }}>
+                <div style={{ width: '100%', height: "100px" }}>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={energyData} barSize={22}>
                             <XAxis dataKey="day" tick={{ fill: "#a39171", fontSize: 10 }} axisLine={false} tickLine={false} />
