@@ -338,7 +338,7 @@ function SetupWizard({ onComplete }) {
                 <h2 style={{ margin: "0 0 8px", fontSize: 32, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                     {steps[step].title}
                 </h2>
-                <p style={{ margin: 0, color: "#a39171", fontSize: 14, letterSpacing: 1 }}>{steps[step].sub}</p>
+                <p style={{ margin: 0, color: "#a39171", fontWeight: "500", fontSize: 14, letterSpacing: 1, fontFamily: "'Inter', sans-serif", }}>{steps[step].sub}</p>
             </div>
 
             <div style={{ flex: 1 }}>{steps[step].content}</div>
