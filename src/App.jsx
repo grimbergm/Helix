@@ -629,12 +629,16 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
             background: "rgba(44, 24, 16, 0.5)", border: "1px solid rgba(163, 145, 113, 0.15)",
             borderRadius: 20, padding: "18px",
         }}>
-            <div style={{fontSize: 10,
+            <div style={{
+                fontSize: 10,
                 color: "#a39171",
                 fontWeight: "600",
                 letterSpacing: "1.5px",
                 marginBottom: 8,
-                fontFamily: "'Inter', sans-serif"}}>
+                fontFamily: "'Inter', sans-serif",
+                display: "block",
+                opacity: 1
+            }}>
 
             </div>
             <div style={{ fontSize: 24, fontWeight: 400, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
@@ -665,7 +669,8 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
             </div>
 
             <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: 20, padding: 20, height: 220 }}>
-                <div style={{ fontSize: 11, color: "#a39171", fontWeight: "600", marginBottom: 20, letterSpacing: 1.5, fontFamily: "'Inter', sans-serif" }}>
+                <div style={{ fontSize: "11px", color: "#a39171", fontWeight: "600", marginBottom: 20, letterSpacing: 1.5, fontFamily: "'Inter', sans-serif", display: "block",
+                    opacity: 1 }}>
                     COINS EARNED — THIS WEEK
                 </div>
                 <div style={{ width: '100%', height: 140 }}>
