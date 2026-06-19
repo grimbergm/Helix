@@ -240,12 +240,19 @@ function TabBar({ active, onChange }) {
                             display: "flex", alignItems: "center", justifyContent: "center",
                             transition: "all 0.3s",
                         }}>
-                            <Icon size={20} color={isActive ? "#e5d3b3" : "rgba(163, 145, 113, 0.4)"} />
+                            {/* 🌟 ICONOS UNIFICADOS CON CHAMPAGNE CLARO Y SU OPACIDAD CORRESPONDIENTE 🌟 */}
+                            <Icon size={20} color="#e5d3b3" style={{ opacity: isActive ? 1 : 0.4 }} />
                         </div>
+
+                        {/* 🌟 TEXTOS CORREGIDOS: CHAMPAGNE COMPLETO O CON OPACIDAD 0.4 SI NO ESTÁ ACTIVO 🌟 */}
                         <span style={{
-                            fontSize: 10, fontWeight: isActive ? 400 : 300, letterSpacing: 1,
-                            color: isActive ? "#e5d3b3" : "rgba(163, 145, 113, 0.4)",
+                            fontSize: "10px",
+                            fontWeight: isActive ? "500" : "400",
+                            letterSpacing: "1px",
+                            color: "#e5d3b3",
+                            opacity: isActive ? 1 : 0.4,
                             fontFamily: "'Inter', sans-serif",
+                            transition: "all 0.3s",
                         }}>{label}</span>
                     </button>
                 );
@@ -540,6 +547,72 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
     );
 }
 
+// ─── MORNING HARVEST MODAL ───────────────────────────────────────────────────
+function MorningModal({ onSubmit, sleepStartTime }) {
+    const [hoursSlept, setHoursSlept] = useState(8); // Valor por defecto por si acaso
+
+    useEffect(() => {
+        if (sleepStartTime) {
+            const diff = new Date() - new Date(sleepStartTime);
+            const hours = Math.max(0.5, diff / (1000 * 60 * 60));
+            setHoursSlept(hours);
+        }
+    }, [sleepStartTime]);
+
+    const estimatedCoins = Math.max(1, Math.floor(hoursSlept * 50));
+
+    return (
+        <div style={{
+            position: "absolute", inset: 0, zIndex: 100,
+            background: "rgba(26, 15, 10, 0.95)",
+            backdropFilter: "blur(12px)",
+            display: "flex", flexDirection: "column",
+            justifyContent: "center", padding: "30px", boxSizing: "border-box"
+        }}>
+            <div style={{ textAlign: "center", marginBottom: "40px" }}>
+                <span style={{ fontSize: "52px", display: "block", marginBottom: "16px" }}>☀️</span>
+                <h2 style={{ margin: "0 0 8px", fontSize: "32px", fontWeight: "400", color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
+                    Good Morning
+                </h2>
+                <p style={{ margin: 0, color: "#e5d3b3", opacity: 0.6, fontSize: "14px", fontFamily: "'Inter', sans-serif" }}>
+                    You rested for {hoursSlept.toFixed(1)} hours last night.
+                </p>
+            </div>
+
+            <div style={{
+                background: "rgba(44, 24, 16, 0.5)",
+                border: "1px solid rgba(163, 145, 113, 0.15)",
+                borderRadius: "20px", padding: "24px", textAlign: "center", marginBottom: "40px"
+            }}>
+                <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", letterSpacing: "1.5px", marginBottom: "12px", fontFamily: "'Inter', sans-serif" }}>
+                    ESTIMATED REWARD
+                </div>
+                <div style={{ fontSize: "36px", fontWeight: "400", color: "#d4af37", fontFamily: "'Playfair Display', serif" }}>
+                    +{estimatedCoins} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>HELIX COINS</span>
+                </div>
+            </div>
+
+            <div>
+                <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", marginBottom: "16px", textAlign: "center", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif" }}>
+                    HOW IS YOUR MORNING ENERGY?
+                </div>
+                <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+                    {[1, 2, 3, 4, 5].map(v => (
+                        <button key={v} onClick={() => onSubmit(v, estimatedCoins)} style={{
+                            width: "50px", height: "50px", borderRadius: "14px",
+                            border: "1px solid rgba(163, 145, 113, 0.25)",
+                            background: "rgba(44, 24, 16, 0.6)",
+                            fontSize: "22px", cursor: "pointer", transition: "all 0.2s"
+                        }}>
+                            {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+}
+
 // ─── SHOP SCREEN ─────────────────────────────────────────────────────────────
 function ShopScreen({ coins, onRedeem }) {
     const [redeemed, setRedeemed] = useState(new Set());
@@ -560,7 +633,17 @@ function ShopScreen({ coins, onRedeem }) {
                     Wellness Market
                 </h2>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <p style={{ margin: 0, color: "#a39171", fontSize: 14 }}>Redeem your HELIX coins</p>
+                    {/* 🌟 1. MEJORA DEL SUBTÍTULO A CHAMPAGNE LEGIBLE 🌟 */}
+                    <p style={{
+                        margin: 0,
+                        color: "#e5d3b3",
+                        opacity: "0.6",
+                        fontSize: "14px",
+                        fontFamily: "'Inter', sans-serif",
+                        letterSpacing: "0.5px"
+                    }}>
+                        Redeem your HELIX coins
+                    </p>
                     <CoinBadge amount={coins} />
                 </div>
             </div>
@@ -576,13 +659,24 @@ function ShopScreen({ coins, onRedeem }) {
                         <div style={{ fontSize: 13, fontWeight: 550, color: "#e5d3b3", marginBottom: 6 }}>
                             {item.name}
                         </div>
+
+                        {/* 🌟 2. MEJORA DE LOS BADGES DE DESCUENTO 🌟 */}
                         <div style={{
-                            display: "inline-block", padding: "4px 10px", borderRadius: 100,
-                            background: `rgba(163, 145, 113, 0.1)`, border: `1px solid rgba(163, 145, 113, 0.2)`,
-                            fontSize: 10, color: "#a39171", marginBottom: 12
+                            display: "inline-block",
+                            padding: "4px 10px",
+                            borderRadius: 100,
+                            background: "rgba(163, 145, 113, 0.15)",
+                            border: "1px solid rgba(163, 145, 113, 0.3)",
+                            fontSize: "10px",
+                            color: "#e5d3b3",
+                            fontWeight: "500",
+                            letterSpacing: "0.5px",
+                            marginBottom: 12,
+                            fontFamily: "'Inter', sans-serif"
                         }}>
                             {item.discount}
                         </div>
+
                         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                             <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#d4af37" }} />
                             <span style={{ fontSize: 14, fontWeight: 200, color: "#d4af37" }}>{item.cost}</span>
@@ -595,56 +689,22 @@ function ShopScreen({ coins, onRedeem }) {
 }
 
 // ─── STATS SCREEN ─────────────────────────────────────────────────────────────
-function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
-    const [energyInput, setEnergyInput] = useState(4);
-    const [energyData, setEnergyData] = useState(ENERGY_DATA);
-    const [earnedTonight, setEarnedTonight] = useState(0);
-
+function StatsScreen() {
     const totalAvoided = WEEKLY_COINS.reduce((a, b) => a + (b.coins > 0 ? 60 : 0), 0);
     const totalCoins = WEEKLY_COINS.reduce((a, b) => a + b.coins, 0);
     const streak = 6;
 
-    const submitEnergy = (val) => {
-        setEnergyInput(val);
-        setEnergyData(prev => {
-            const copy = [...prev];
-            copy[copy.length - 1] = { ...copy[copy.length - 1], level: val };
-            return copy;
-        });
-
-        if (sleepStartTime) {
-            const wakeTime = new Date();
-            const differenceInMs = wakeTime - sleepStartTime;
-            const hoursSlept = differenceInMs / (1000 * 60 * 60);
-            const coinsEarned = Math.max(1, Math.floor(hoursSlept * 50));
-
-            setCoins(prevCoins => prevCoins + coinsEarned);
-            setEarnedTonight(coinsEarned);
-            setSleepStartTime(null);
-        }
-    };
-
     const StatCard = ({ label, value, unit }) => (
         <div style={{
-            background: "rgba(44, 24, 16, 0.5)",
-            border: "1px solid rgba(163, 145, 113, 0.15)",
-            borderRadius: "20px",
-            padding: "18px",
-            boxSizing: "border-box"
+            background: "rgba(44, 24, 16, 0.5)", border: "1px solid rgba(163, 145, 113, 0.15)",
+            borderRadius: "20px", padding: "18px", boxSizing: "border-box"
         }}>
-            {/* 🌟 AQUÍ CORREGIMOS EL INPUT DE COLOR ELIMINANDO EL !IMPORTANT SINTÁCTICO 🌟 */}
             <div style={{
-                fontSize: "11px",
-                color: "#a39171",
-                fontWeight: "600",
-                letterSpacing: "1.5px",
-                marginBottom: "8px",
-                fontFamily: "'Inter', sans-serif",
-                display: "block"
+                fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500",
+                letterSpacing: "1.5px", marginBottom: "8px", fontFamily: "'Inter', sans-serif", display: "block"
             }}>
                 {label}
             </div>
-
             <div style={{ fontSize: "24px", fontWeight: "400", color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
                 {value}<span style={{ fontSize: "12px", color: "#a39171", marginLeft: "4px" }}>{unit}</span>
             </div>
@@ -652,51 +712,27 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
     );
 
     return (
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px", gap: 20, overflowY: "auto" }}>
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "24px", gap: "20px", overflowY: "auto" }}>
             <h2 style={{ margin: 0, fontSize: 28, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Sleep Impact</h2>
-
-            {earnedTonight > 0 && (
-                <div style={{
-                    background: "rgba(212, 175, 55, 0.1)", border: "1px solid #d4af37",
-                    borderRadius: 16, padding: "14px", color: "#e5d3b3", textAlignment: "center",
-                    fontFamily: "'Playfair Display', serif", letterSpacing: "1px"
-                }}>
-                    ✨ MORNING HARVEST: +{earnedTonight} HELIX COINS ADDED TO YOUR WALLET
-                </div>
-            )}
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 <StatCard label="BLUE LIGHT AVOIDED" value={totalAvoided} unit="min" />
                 <StatCard label="HELIX COINS EARNED" value={totalCoins} unit="✦" />
                 <StatCard label="BEST STREAK" value={streak} unit=" nights" />
-                <StatCard label="AVG ENERGY" value={(energyData.reduce((a,b) => a + b.level, 0) / energyData.length).toFixed(1)} unit="/5" />
+                <StatCard label="AVG ENERGY" value="3.9" unit="/5" />
             </div>
 
             {/* Coins Chart */}
             <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", height: "220px", boxSizing: "border-box" }}>
-
-                {/* 🌟 TEXTO SÓLIDO EN LUGAR DE SINTAXIS CSS PRORROTIADA 🌟 */}
-                <div style={{
-                    fontSize: "11px",
-                    color: "#a39171",
-                    fontWeight: "600",
-                    marginBottom: "20px",
-                    letterSpacing: "1.5px",
-                    fontFamily: "'Inter', sans-serif",
-                    display: "block"
-                }}>
+                <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500", marginBottom: "20px", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif", display: "block" }}>
                     COINS EARNED — THIS WEEK
                 </div>
                 <div style={{ width: '100%', height: 140 }}>
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart data={WEEKLY_COINS}>
-                            <XAxis dataKey="day" tick={{ fill: "#a39171", fontSize: 10 }} axisLine={false} tickLine={false} />
+                            <XAxis dataKey="day" tick={{ fill: "#e5d3b3", fontSize: "11px", fontFamily: "'Inter', sans-serif", opacity: 0.6 }} axisLine={false} tickLine={false} />
                             <YAxis hide />
-                            <Tooltip
-                                cursor={{ fill: 'rgba(163, 145, 113, 0.05)' }}
-                                contentStyle={{ background: "#1a0f0a", border: "1px solid #a39171", borderRadius: 10 }}
-                                itemStyle={{ color: "#e5d3b3" }}
-                            />
+                            <Tooltip cursor={{ fill: 'rgba(163, 145, 113, 0.05)' }} contentStyle={{ background: "#1a0f0a", border: "1px solid #a39171", borderRadius: 10 }} itemStyle={{ color: "#e5d3b3" }} />
                             <Bar dataKey="coins" radius={[4, 4, 0, 0]}>
                                 {WEEKLY_COINS.map((entry, i) => (
                                     <Cell key={i} fill={entry.coins > 0 ? "#a39171" : "rgba(163, 145, 113, 0.1)"} />
@@ -709,49 +745,21 @@ function StatsScreen({ sleepStartTime, setSleepStartTime, setCoins }) {
 
             {/* Energy Chart */}
             <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", boxSizing: "border-box" }}>
-
-                {/* 🌟 CORRECCIÓN DEL TÍTULO DE ENERGÍA 🌟 */}
-                <div style={{
-                    fontSize: "11px",
-                    color: "#a39171",
-                    fontWeight: "600",
-                    marginBottom: "20px",
-                    letterSpacing: "1.5px",
-                    fontFamily: "'Inter', sans-serif",
-                    display: "block"
-                }}>
+                <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500", marginBottom: "20px", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif", display: "block" }}>
                     MORNING ENERGY LEVELS
                 </div>
                 <div style={{ width: '100%', height: "100px" }}>
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={energyData} barSize={22}>
-                            <XAxis dataKey="day" tick={{ fill: "#a39171", fontSize: 10 }} axisLine={false} tickLine={false} />
+                        <BarChart data={ENERGY_DATA} barSize={22}>
+                            <XAxis dataKey="day" tick={{ fill: "#e5d3b3", fontSize: "11px", fontFamily: "'Inter', sans-serif", opacity: 0.6 }} axisLine={false} tickLine={false} />
                             <YAxis hide domain={[0, 5]} />
                             <Bar dataKey="level" radius={[6, 6, 0, 0]}>
-                                {energyData.map((entry, i) => (
+                                {ENERGY_DATA.map((entry, i) => (
                                     <Cell key={i} fill={entry.level >= 4 ? "#d4af37" : "#a39171"} fillOpacity={0.4 + (entry.level * 0.12)} />
                                 ))}
                             </Bar>
                         </BarChart>
                     </ResponsiveContainer>
-                </div>
-
-                <div style={{ marginTop: 20, borderTop: "1px solid rgba(163, 145, 113, 0.15)", paddingTop: 20 }}>
-                    <div style={{ fontSize: 11, color: "#a39171", marginBottom: 15, textAlign: 'center', letterSpacing: 1 }}>
-                        LOG TODAY'S MORNING ENERGY
-                    </div>
-                    <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-                        {[1, 2, 3, 4, 5].map(v => (
-                            <button key={v} onClick={() => submitEnergy(v)} style={{
-                                width: 45, height: 45, borderRadius: 12, border: energyInput === v ? "1px solid #d4af37" : "1px solid rgba(163, 145, 113, 0.2)",
-                                background: energyInput === v ? "rgba(212, 175, 55, 0.1)" : "rgba(44, 24, 16, 0.4)",
-                                color: "#e5d3b3",
-                                fontSize: 18, cursor: "pointer", transition: 'all 0.3s'
-                            }}>
-                                {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
-                            </button>
-                        ))}
-                    </div>
                 </div>
             </div>
         </div>
@@ -777,7 +785,13 @@ function ProfileScreen({ coins, onReset }) {
                 }}>🌙</div>
                 <div style={{ textAlign: "center" }}>
                     <h3 style={{ margin: "0 0 4px", fontSize: 24, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Helix User</h3>
-                    <p style={{ margin: 0, color: "#a39171", fontSize: 13, letterSpacing: 1 }}>Joined May 2025</p>
+                    <p style={{ margin: 0,
+                        color: "#e5d3b3",
+                        fontSize: "13px",
+                        fontFamily: "'Inter', sans-serif",
+                        fontWeight: "400",
+                        letterSpacing: "1px",
+                        opacity: "0.6" }}>Joined May 2025</p>
                 </div>
                 <CoinBadge amount={coins} size="lg" />
             </div>
@@ -872,22 +886,12 @@ export default function HelixApp() {
 
     return (
         <div style={{
-            width: "100%",
-            maxWidth: 420,
-            margin: "0 auto",
-            minHeight: "100dvh",
-            height: "100dvh",
+            width: "100%", maxWidth: 420, margin: "0 auto", minHeight: "100dvh", height: "100dvh",
             background: "linear-gradient(170deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            position: "relative",
-            overflow: "hidden", // Completely blocks page leakage
-            fontFamily: "'Inter', sans-serif",
-            fontWeight: "200",
-            boxSizing: "border-box"
+            display: "flex", flexDirection: "column", justifyContent: "space-between",
+            position: "relative", overflow: "hidden", fontFamily: "'Inter', sans-serif", fontWeight: "200", boxSizing: "border-box"
         }}>
-            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400&display=swap" rel="stylesheet" />
+            <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400;500;600&display=swap" rel="stylesheet" />
 
             {showSplash ? (
                 <WelcomeScreen onNext={() => setShowSplash(false)} />
@@ -895,14 +899,21 @@ export default function HelixApp() {
                 <SetupWizard onComplete={(cfg) => { setConfig(cfg); setConfigured(true); }} />
             ) : (
                 <>
+                    {/* 🌟 NUEVO: El Modal Matutino salta si regresas a la Home y el sueño quedó activo 🌟 */}
+                    {tab === "home" && !sessionActive && sleepStartTime && (
+                        <MorningModal
+                            sleepStartTime={sleepStartTime}
+                            onSubmit={(energyLevel, earnedCoins) => {
+                                setCoins(c => c + earnedCoins);
+
+                                setSleepStartTime(null);
+                            }}
+                        />
+                    )}
 
                     <div style={{
-                        flex: 1,
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "calc(100% - 60px)",
-                        overflowY: "auto",
-                        WebkitOverflowScrolling: "touch"
+                        flex: 1, display: "flex", flexDirection: "column",
+                        height: "calc(100% - 60px)", overflowY: "auto", WebkitOverflowScrolling: "touch"
                     }}>
                         {tab === "home" && (
                             <HomeScreen
@@ -912,13 +923,7 @@ export default function HelixApp() {
                             />
                         )}
                         {tab === "shop" && <ShopScreen coins={coins} onRedeem={(cost) => setCoins(c => c - cost)} />}
-                        {tab === "stats" && (
-                            <StatsScreen
-                                sleepStartTime={sleepStartTime}
-                                setSleepStartTime={setSleepStartTime}
-                                setCoins={setCoins}
-                            />
-                        )}
+                        {tab === "stats" && <StatsScreen />} {/* 🌟 Stats queda limpio y desacoplado */}
                         {tab === "profile" && <ProfileScreen coins={coins} onReset={() => setConfigured(false)} />}
                     </div>
                     <TabBar active={tab} onChange={setTab} />
