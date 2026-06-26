@@ -219,14 +219,14 @@ function TabBar({ active, onChange }) {
         { id: "stats", icon: BarChart2, label: "Stats" },
         { id: "profile", icon: User, label: "Profile" },
     ];
-    return (
-        <div style={{
-            display: "flex",
-            background: "rgba(26, 15, 10, 0.98)",
-            borderTop: "1px solid rgba(163, 145, 113, 0.15)",
-            backdropFilter: "blur(20px)",
-            padding: "10px 0 6px",
-        }}>
+     return (
+         <div style={{
+             display: "flex",
+             background: "rgba(82, 46, 30, 0.98)",
+             borderTop: "1px solid rgba(163, 145, 113, 0.15)",
+             backdropFilter: "blur(20px)",
+             padding: "10px 0 6px",
+         }}>
             {tabs.map(({ id, icon: Icon, label }) => {
                 const isActive = active === id;
                 return (
@@ -281,7 +281,7 @@ function SetupWizard({ onComplete }) {
                     padding: "0 10px" }}>
                     <input type="time" value={bedtime} onChange={e => setBedtime(e.target.value)}
                            style={{
-                               background: "rgba(44, 24, 16, 0.4)",
+                               background: "rgba(82, 46, 30, 0.4)",
                                border: "1px solid rgba(163, 145, 113, 0.2)",
                                borderRadius: 16, padding: "20px", fontSize: 42,
                                color: "#e5d3b3", fontFamily: "'Playfair Display', serif",
@@ -299,7 +299,7 @@ function SetupWizard({ onComplete }) {
                     {[30, 60, 90].map(d => (
                         <button key={d} onClick={() => setDuration(d)} style={{
                             padding: "20px", borderRadius: 16,
-                            background: duration === d ? "rgba(163, 145, 113, 0.15)" : "rgba(163, 145, 113, 0.04)",
+                            background: duration === d ? "rgba(82, 46, 30, 0.15)" : "rgba(82, 46, 30, 0.04)",
                             border: `1px solid ${duration === d ? "rgba(163, 145, 113, 0.4)" : "rgba(163, 145, 113, 0.1)"}`,
                             color: duration === d ? "#e5d3b3" : "#a39171",
                             fontSize: 16, fontWeight: 300, cursor: "pointer",
@@ -386,19 +386,19 @@ function SetupWizard({ onComplete }) {
             </div>
 
             {/* Botón de acción */}
-            <button onClick={() => step < steps.length - 1 ? setStep(step + 1) : onComplete({ bedtime, duration })}
-                    style={{
-                        padding: "18px", borderRadius: 16, cursor: "pointer",
-                        background: "linear-gradient(135deg, #5d2e0a 0%, #3d1f07 100%)",
-                        border: "1px solid rgba(229, 211, 179, 0.2)",
-                        color: "#e5d3b3",
-                        fontFamily: "'Playfair Display', serif",
-                        textTransform: "uppercase",
-                        letterSpacing: "3px",
-                        fontSize: 14,
-                        width: "100%",
-                        marginTop: "auto"
-                    }}>
+             <button onClick={() => step < steps.length - 1 ? setStep(step + 1) : onComplete({ bedtime, duration })}
+                     style={{
+                         padding: "18px", borderRadius: 16, cursor: "pointer",
+                         background: "linear-gradient(135deg, #522E1E 0%, #3d2215 100%)",
+                         border: "1px solid rgba(229, 211, 179, 0.2)",
+                         color: "#e5d3b3",
+                         fontFamily: "'Playfair Display', serif",
+                         textTransform: "uppercase",
+                         letterSpacing: "3px",
+                         fontSize: 14,
+                         width: "100%",
+                         marginTop: "auto"
+                     }}>
                 {step < steps.length - 1 ? "Next Step" : "Begin Routine ✦"}
             </button>
         </div>
@@ -442,7 +442,7 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
                 </div>
 
                 <div style={{
-                    background: "rgba(44, 24, 16, 0.4)",
+                    background: "rgba(82, 46, 30, 0.4)",
                     border: "1px solid rgba(163, 145, 113, 0.1)",
                     borderRadius: 20, padding: "18px"
                 }}>
@@ -470,11 +470,11 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
                 </h1>
             </div>
 
-            <div style={{
-                background: "rgba(44, 24, 16, 0.6)",
-                border: "1px solid rgba(163, 145, 113, 0.15)",
-                borderRadius: 24, padding: "24px",
-            }}>
+             <div style={{
+                 background: "rgba(82, 46, 30, 0.6)",
+                 border: "1px solid rgba(163, 145, 113, 0.15)",
+                 borderRadius: 24, padding: "24px",
+             }}>
                 <div style={{ fontSize: 11, color: "#a39171", letterSpacing: 2, marginBottom: 10, fontWeight: 550 }}>YOUR BALANCE
                 </div>
                 <CoinBadge amount={Lunas} size="lg" />
@@ -485,7 +485,7 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
                     <div key={i} style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
                         <div style={{
                             width: "100%", aspectRatio: "1", borderRadius: 12,
-                            background: d.done ? "rgba(163, 145, 113, 0.15)" : "rgba(44, 24, 16, 0.4)",
+                            background: d.done ? "rgba(163, 145, 113, 0.15)" : "rgba(82, 46, 30, 0.4)",
                             border: `1px solid ${d.done ? "rgba(163, 145, 113, 0.3)" : "rgba(163, 145, 113, 0.1)"}`,
                             display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, color: "#d4af37"
                         }}>
@@ -497,12 +497,12 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
                 ))}
             </div>
 
-            {/* Config info */}
-            <div style={{
-                background: "rgba(44, 24, 16, 0.6)", border: "1px solid rgba(51,65,85,0.4)",
-                borderRadius: 16, padding: "14px 16px",
-                display: "flex", justifyContent: "space-between"
-            }}>
+             {/* Config info */}
+             <div style={{
+                 background: "rgba(82, 46, 30, 0.6)", border: "1px solid rgba(51,65,85,0.4)",
+                 borderRadius: 16, padding: "14px 16px",
+                 display: "flex", justifyContent: "space-between"
+             }}>
                 <div style={{ textAlign: "center" }}>
                     <div style={{ fontSize: 10, color: "#a39171", fontWeight: "600", letterSpacing: "1px", fontFamily: "'Inter', sans-serif" }}>BEDTIME</div>
                     <div style={{ fontSize: 18, fontWeight: 700, color: "#e5d3b3", fontFamily: "'Space Mono', monospace" }}>
@@ -534,13 +534,13 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
 
             <div style={{ flex: 1 }} />
 
-            <button onClick={onStart} style={{
-                padding: "20px", borderRadius: 20, border: "1px solid rgba(229, 211, 179, 0.2)", cursor: "pointer",
-                background: "linear-gradient(135deg, #5d2e0a 0%, #3d1f07 100%)",
-                color: "#e5d3b3", fontSize: 15, fontFamily: "'Playfair Display', serif",
-                textTransform: "uppercase", letterSpacing: "3px",
-                boxShadow: "0 10px 40px rgba(0,0,0,0.5)"
-            }}>
+             <button onClick={onStart} style={{
+                 padding: "20px", borderRadius: 20, border: "1px solid rgba(229, 211, 179, 0.2)", cursor: "pointer",
+                 background: "linear-gradient(135deg, #522E1E 0%, #3d2215 100%)",
+                 color: "#e5d3b3", fontSize: 15, fontFamily: "'Playfair Display', serif",
+                 textTransform: "uppercase", letterSpacing: "3px",
+                 boxShadow: "0 10px 40px rgba(0,0,0,0.5)"
+             }}>
                 Start Pre-sleep Routine ✦
             </button>
         </div>
@@ -561,14 +561,14 @@ function MorningModal({ onSubmit, sleepStartTime }) {
 
     const estimatedLunas = Math.max(1, Math.floor(hoursSlept * 50));
 
-    return (
-        <div style={{
-            position: "absolute", inset: 0, zIndex: 100,
-            background: "rgba(26, 15, 10, 0.95)",
-            backdropFilter: "blur(12px)",
-            display: "flex", flexDirection: "column",
-            justifyContent: "center", padding: "30px", boxSizing: "border-box"
-        }}>
+     return (
+         <div style={{
+             position: "absolute", inset: 0, zIndex: 100,
+             background: "rgba(82, 46, 30, 0.95)",
+             backdropFilter: "blur(12px)",
+             display: "flex", flexDirection: "column",
+             justifyContent: "center", padding: "30px", boxSizing: "border-box"
+         }}>
             <div style={{ textAlign: "center", marginBottom: "40px" }}>
                 <span style={{ fontSize: "52px", display: "block", marginBottom: "16px" }}>☀️</span>
                 <h2 style={{ margin: "0 0 8px", fontSize: "32px", fontWeight: "400", color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>
@@ -579,11 +579,11 @@ function MorningModal({ onSubmit, sleepStartTime }) {
                 </p>
             </div>
 
-            <div style={{
-                background: "rgba(44, 24, 16, 0.5)",
-                border: "1px solid rgba(163, 145, 113, 0.15)",
-                borderRadius: "20px", padding: "24px", textAlign: "center", marginBottom: "40px"
-            }}>
+             <div style={{
+                 background: "rgba(82, 46, 30, 0.5)",
+                 border: "1px solid rgba(163, 145, 113, 0.15)",
+                 borderRadius: "20px", padding: "24px", textAlign: "center", marginBottom: "40px"
+             }}>
                 <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", letterSpacing: "1.5px", marginBottom: "12px", fontFamily: "'Inter', sans-serif" }}>
                     ESTIMATED REWARD
                 </div>
@@ -597,13 +597,13 @@ function MorningModal({ onSubmit, sleepStartTime }) {
                     HOW IS YOUR MORNING ENERGY?
                 </div>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
-                    {[1, 2, 3, 4, 5].map(v => (
-                        <button key={v} onClick={() => onSubmit(v, estimatedLunas)} style={{
-                            width: "50px", height: "50px", borderRadius: "14px",
-                            border: "1px solid rgba(163, 145, 113, 0.25)",
-                            background: "rgba(44, 24, 16, 0.6)",
-                            fontSize: "22px", cursor: "pointer", transition: "all 0.2s"
-                        }}>
+                     {[1, 2, 3, 4, 5].map(v => (
+                         <button key={v} onClick={() => onSubmit(v, estimatedLunas)} style={{
+                             width: "50px", height: "50px", borderRadius: "14px",
+                             border: "1px solid rgba(163, 145, 113, 0.25)",
+                             background: "rgba(82, 46, 30, 0.6)",
+                             fontSize: "22px", cursor: "pointer", transition: "all 0.2s"
+                         }}>
                             {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
                         </button>
                     ))}
@@ -649,12 +649,12 @@ function ShopScreen({ Lunas, onRedeem }) {
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, overflow: "auto", flex: 1 }}>
-                {MARKETPLACE_ITEMS.map(item => (
-                    <div key={item.id} onClick={() => setSelected(item)} style={{
-                        background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.15)",
-                        borderRadius: 20, padding: "18px", cursor: "pointer",
-                        opacity: redeemed.has(item.id) ? 0.4 : 1,
-                    }}>
+                 {MARKETPLACE_ITEMS.map(item => (
+                     <div key={item.id} onClick={() => setSelected(item)} style={{
+                         background: "rgba(82, 46, 30, 0.4)", border: "1px solid rgba(163, 145, 113, 0.15)",
+                         borderRadius: 20, padding: "18px", cursor: "pointer",
+                         opacity: redeemed.has(item.id) ? 0.4 : 1,
+                     }}>
                         <div style={{ fontSize: 32, marginBottom: 12 }}>{item.icon}</div>
                         <div style={{ fontSize: 13, fontWeight: 550, color: "#e5d3b3", marginBottom: 6 }}>
                             {item.name}
@@ -694,11 +694,11 @@ function StatsScreen() {
     const totalLunas = WEEKLY_Lunas.reduce((a, b) => a + b.Lunas, 0);
     const streak = 6;
 
-    const StatCard = ({ label, value, unit }) => (
-        <div style={{
-            background: "rgba(44, 24, 16, 0.5)", border: "1px solid rgba(163, 145, 113, 0.15)",
-            borderRadius: "20px", padding: "18px", boxSizing: "border-box"
-        }}>
+     const StatCard = ({ label, value, unit }) => (
+         <div style={{
+             background: "rgba(82, 46, 30, 0.5)", border: "1px solid rgba(163, 145, 113, 0.15)",
+             borderRadius: "20px", padding: "18px", boxSizing: "border-box"
+         }}>
             <div style={{
                 fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500",
                 letterSpacing: "1.5px", marginBottom: "8px", fontFamily: "'Inter', sans-serif", display: "block"
@@ -722,8 +722,8 @@ function StatsScreen() {
                 <StatCard label="AVG ENERGY" value="3.9" unit="/5" />
             </div>
 
-            {/* Lunas Chart */}
-            <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", height: "220px", boxSizing: "border-box" }}>
+             {/* Lunas Chart */}
+             <div style={{ background: "rgba(82, 46, 30, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", height: "220px", boxSizing: "border-box" }}>
                 <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500", marginBottom: "20px", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif", display: "block" }}>
                     Lunas EARNED — THIS WEEK
                 </div>
@@ -743,8 +743,8 @@ function StatsScreen() {
                 </div>
             </div>
 
-            {/* Energy Chart */}
-            <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", boxSizing: "border-box" }}>
+             {/* Energy Chart */}
+             <div style={{ background: "rgba(82, 46, 30, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", boxSizing: "border-box" }}>
                 <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500", marginBottom: "20px", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif", display: "block" }}>
                     MORNING ENERGY LEVELS
                 </div>
@@ -777,12 +777,12 @@ function ProfileScreen({ Lunas, onReset }) {
     return (
         <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "30px", gap: 30 }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 16 }}>
-                <div style={{
-                    width: 90, height: 90, borderRadius: "50%",
-                    background: "linear-gradient(135deg, #5d2e0a, #2c1810)", border: "2px solid #a39171",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: 42, boxShadow: "0 0 40px rgba(163, 145, 113, 0.2)"
-                }}>🌙</div>
+                 <div style={{
+                     width: 90, height: 90, borderRadius: "50%",
+                     background: "linear-gradient(135deg, #522E1E, #3d2215)", border: "2px solid #a39171",
+                     display: "flex", alignItems: "center", justifyContent: "center",
+                     fontSize: 42, boxShadow: "0 0 40px rgba(163, 145, 113, 0.2)"
+                 }}>🌙</div>
                 <div style={{ textAlign: "center" }}>
                     <h3 style={{ margin: "0 0 4px", fontSize: 24, fontWeight: 550, color: "#e5d3b3", fontFamily: "'Playfair Display', serif" }}>Helix User</h3>
                     <p style={{ margin: 0,
@@ -797,12 +797,12 @@ function ProfileScreen({ Lunas, onReset }) {
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                {rows.map((row, i) => (
-                    <div key={i} style={{
-                        display: "flex", alignItems: "center", justifyContent: "space-between",
-                        background: "rgba(44, 24, 16, 0.6)", border: "1px solid rgba(51,65,85,0.4)",
-                        borderRadius: 14, padding: "14px 16px"
-                    }}>
+                 {rows.map((row, i) => (
+                     <div key={i} style={{
+                         display: "flex", alignItems: "center", justifyContent: "space-between",
+                         background: "rgba(82, 46, 30, 0.6)", border: "1px solid rgba(51,65,85,0.4)",
+                         borderRadius: 14, padding: "14px 16px"
+                     }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                             <span style={{ fontSize: 20 }}>{row.icon}</span>
                             <span style={{ fontSize: 14, color: "#64748b", fontFamily: "'DM Sans', sans-serif" }}>{row.label}</span>
@@ -884,13 +884,13 @@ export default function HelixApp() {
         setSessionActive(false);
     };
 
-    return (
-        <div style={{
-            width: "100%", maxWidth: 420, margin: "0 auto", minHeight: "100dvh", height: "100dvh",
-            background: "linear-gradient(170deg, #1a0f0a 0%, #2c1810 40%, #1a0f0a 100%)",
-            display: "flex", flexDirection: "column", justifyContent: "space-between",
-            position: "relative", overflow: "hidden", fontFamily: "'Inter', sans-serif", fontWeight: "200", boxSizing: "border-box"
-        }}>
+     return (
+         <div style={{
+             width: "100%", maxWidth: 420, margin: "0 auto", minHeight: "100dvh", height: "100dvh",
+             background: "linear-gradient(170deg, #522E1E 0%, #3d2215 40%, #522E1E 100%)",
+             display: "flex", flexDirection: "column", justifyContent: "space-between",
+             position: "relative", overflow: "hidden", fontFamily: "'Inter', sans-serif", fontWeight: "200", boxSizing: "border-box"
+         }}>
             <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Inter:wght@100;300;400;500;600&display=swap" rel="stylesheet" />
 
             {showSplash ? (
