@@ -424,17 +424,17 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
     }, [sessionActive]);
 
     if (sessionActive) {
-        return (
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "20px", gap: 20 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                    <div>
-                        <div style={{ fontSize: 11, color: "#a39171", letterSpacing: 2, textTransform: "uppercase" }}>Pre-sleep Routine</div>
-                        <div style={{ fontSize: 16, fontWeight: 300, color: "#e5d3b3" }}>
-                            {penalized ? <span style={{ color: "#f87171" }}>Penalized ✗</span> : "Active ✦"}
-                        </div>
-                    </div>
-                    <CoinBadge amount={Math.floor(progress * config.duration)} />
-                </div>
+         return (
+             <div style={{ flex: 1, display: "flex", flexDirection: "column", padding: "20px", gap: 20 }}>
+                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                     <div>
+                         <div style={{ fontSize: 11, color: "#a39171", letterSpacing: 2, textTransform: "uppercase" }}>Pre-sleep Routine</div>
+                         <div style={{ fontSize: 16, fontWeight: 300, color: "#e5d3b3" }}>
+                             {penalized ? <span style={{ color: "#f87171" }}>Penalized ✗</span> : "Active ✦"}
+                         </div>
+                     </div>
+                     <CoinBadge amount={Math.floor((sessionTotal - sessionSeconds) / 60)} />
+                 </div>
 
                 <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28 }}>
                     <BreathingRing progress={progress} phase={breathPhase} />
@@ -548,18 +548,19 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
 }
 
 // ─── MORNING HARVEST MODAL ───────────────────────────────────────────────────
-function MorningModal({ onSubmit, sleepStartTime }) {
-    const [hoursSlept, setHoursSlept] = useState(8); // Valor por defecto por si acaso
+function MorningModal({ onSubmit, sleepStartTime, preSleepLunas }) {
+     const [hoursSlept, setHoursSlept] = useState(8); // Valor por defecto por si acaso
 
-    useEffect(() => {
-        if (sleepStartTime) {
-            const diff = new Date() - new Date(sleepStartTime);
-            const hours = Math.max(0.5, diff / (1000 * 60 * 60));
-            setHoursSlept(hours);
-        }
-    }, [sleepStartTime]);
+     useEffect(() => {
+         if (sleepStartTime) {
+             const diff = new Date() - new Date(sleepStartTime);
+             const hours = diff / (1000 * 60 * 60);
+             setHoursSlept(hours);
+         }
+     }, [sleepStartTime]);
 
-    const estimatedLunas = Math.max(1, Math.floor(hoursSlept * 50));
+     const nightSleepLunas = Math.max(0, Math.floor(hoursSlept * 50));
+     const totalLunas = preSleepLunas + nightSleepLunas;
 
      return (
          <div style={{
@@ -579,35 +580,38 @@ function MorningModal({ onSubmit, sleepStartTime }) {
                 </p>
             </div>
 
-             <div style={{
-                 background: "rgba(82, 46, 30, 0.5)",
-                 border: "1px solid rgba(163, 145, 113, 0.15)",
-                 borderRadius: "20px", padding: "24px", textAlign: "center", marginBottom: "40px"
-             }}>
-                <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", letterSpacing: "1.5px", marginBottom: "12px", fontFamily: "'Inter', sans-serif" }}>
-                    ESTIMATED REWARD
-                </div>
-                <div style={{ fontSize: "36px", fontWeight: "400", color: "#d4af37", fontFamily: "'Playfair Display', serif" }}>
-                    +{estimatedLunas} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>HELIX Lunas</span>
-                </div>
-            </div>
+              <div style={{
+                  background: "rgba(82, 46, 30, 0.5)",
+                  border: "1px solid rgba(163, 145, 113, 0.15)",
+                  borderRadius: "20px", padding: "24px", textAlign: "center", marginBottom: "40px"
+              }}>
+                 <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", letterSpacing: "1.5px", marginBottom: "12px", fontFamily: "'Inter', sans-serif" }}>
+                     ESTIMATED REWARD
+                 </div>
+                 <div style={{ fontSize: "36px", fontWeight: "400", color: "#d4af37", fontFamily: "'Playfair Display', serif" }}>
+                     +{totalLunas} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>HELIX Lunas</span>
+                 </div>
+                 <div style={{ fontSize: "12px", color: "#a39171", marginTop: "12px", fontFamily: "'Inter', sans-serif" }}>
+                     {preSleepLunas} pre-sleep + {nightSleepLunas} night sleep
+                 </div>
+             </div>
 
             <div>
                 <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", marginBottom: "16px", textAlign: "center", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif" }}>
                     HOW IS YOUR MORNING ENERGY?
                 </div>
-                <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
-                     {[1, 2, 3, 4, 5].map(v => (
-                         <button key={v} onClick={() => onSubmit(v, estimatedLunas)} style={{
-                             width: "50px", height: "50px", borderRadius: "14px",
-                             border: "1px solid rgba(163, 145, 113, 0.25)",
-                             background: "rgba(82, 46, 30, 0.6)",
-                             fontSize: "22px", cursor: "pointer", transition: "all 0.2s"
-                         }}>
-                            {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
-                        </button>
-                    ))}
-                </div>
+                 <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
+                      {[1, 2, 3, 4, 5].map(v => (
+                          <button key={v} onClick={() => onSubmit(v, totalLunas)} style={{
+                              width: "50px", height: "50px", borderRadius: "14px",
+                              border: "1px solid rgba(163, 145, 113, 0.25)",
+                              background: "rgba(82, 46, 30, 0.6)",
+                              fontSize: "22px", cursor: "pointer", transition: "all 0.2s"
+                          }}>
+                             {["😴", "😐", "🙂", "😊", "⚡"][v - 1]}
+                         </button>
+                     ))}
+                 </div>
             </div>
         </div>
     );
@@ -847,10 +851,11 @@ export default function HelixApp() {
     const [sessionSeconds, setSessionSeconds] = useState(0);
     const [factIndex, setFactIndex] = useState(0);
 
-    // Fixed: Properly declared internal component state
-    const [sleepStartTime, setSleepStartTime] = useState(null);
+     // Fixed: Properly declared internal component state
+     const [sleepStartTime, setSleepStartTime] = useState(null);
+     const [preSleepLunas, setPreSleepLunas] = useState(0);
 
-    const sessionTotal = config.duration * 60;
+     const sessionTotal = config.duration * 60;
     const { penalized, warningVisible, resetPenalty } = useVisibilityTracking(sessionActive);
 
     useEffect(() => {
@@ -874,15 +879,22 @@ export default function HelixApp() {
         return () => clearInterval(id);
     }, [sessionActive]);
 
-    const handleStart = () => {
-        resetPenalty();
-        setSessionActive(true);
-        setSleepStartTime(new Date());
-    };
+     const handleStart = () => {
+         resetPenalty();
+         setSessionActive(true);
+         setSleepStartTime(new Date());
+         setPreSleepLunas(0);
+     };
 
-    const handleStop = () => {
-        setSessionActive(false);
-    };
+     const handleStop = () => {
+         if (sessionActive && sessionSeconds !== undefined) {
+             // Calculate how long they did the routine (1 Luna per minute)
+             const secondsCompleted = sessionTotal - sessionSeconds;
+             const minutesCompleted = Math.floor(secondsCompleted / 60);
+             setPreSleepLunas(minutesCompleted);
+         }
+         setSessionActive(false);
+     };
 
      return (
          <div style={{
@@ -903,10 +915,12 @@ export default function HelixApp() {
                     {tab === "home" && !sessionActive && sleepStartTime && (
                         <MorningModal
                             sleepStartTime={sleepStartTime}
+                            preSleepLunas={preSleepLunas}
                             onSubmit={(energyLevel, earnedLunas) => {
                                 setLunas(c => c + earnedLunas);
 
                                 setSleepStartTime(null);
+                                setPreSleepLunas(0);
                             }}
                         />
                     )}
