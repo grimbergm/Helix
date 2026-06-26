@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Moon, Star, Lunas, ShoppingBag, BarChart2, User, Flame, Zap, Award, ChevronRight, Check, ArrowLeft, Sun, Coffee, Leaf, Heart, Clock, TrendingUp, Calendar, Bell, Settings, Gift, X, Play, Pause, SkipForward, Battery, Wifi, Signal } from "lucide-react";
+import { Moon, Star, Coins, ShoppingBag, BarChart2, User, Flame, Zap, Award, ChevronRight, Check, ArrowLeft, Sun, Coffee, Leaf, Heart, Clock, TrendingUp, Calendar, Bell, Settings, Gift, X, Play, Pause, SkipForward, Battery, Wifi, Signal } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Cell } from "recharts";
 import helixLogo from "./assets/Helix_logo.jpeg";
 
