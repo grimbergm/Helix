@@ -586,10 +586,10 @@ function MorningModal({ onSubmit, sleepStartTime, preSleepLunas }) {
                   borderRadius: "20px", padding: "24px", textAlign: "center", marginBottom: "40px"
               }}>
                  <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: 0.6, fontWeight: "600", letterSpacing: "1.5px", marginBottom: "12px", fontFamily: "'Inter', sans-serif" }}>
-                     ESTIMATED REWARD
+                     YOUR REWARD
                  </div>
                  <div style={{ fontSize: "36px", fontWeight: "400", color: "#d4af37", fontFamily: "'Playfair Display', serif" }}>
-                     +{totalLunas} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>HELIX Lunas</span>
+                     +{totalLunas} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>Lunas</span>
                  </div>
                  <div style={{ fontSize: "12px", color: "#a39171", marginTop: "12px", fontFamily: "'Inter', sans-serif" }}>
                      {preSleepLunas} pre-sleep + {nightSleepLunas} night sleep
