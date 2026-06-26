@@ -548,19 +548,19 @@ function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, ses
 }
 
 // ─── MORNING HARVEST MODAL ───────────────────────────────────────────────────
-function MorningModal({ onSubmit, sleepStartTime, preSleepLunas }) {
-     const [hoursSlept, setHoursSlept] = useState(8); // Valor por defecto por si acaso
+function MorningModal({ onSubmit, sleepStartTime, preSleepLunas, penalized }) {
+    const [hoursSlept, setHoursSlept] = useState(8); // Valor por defecto por si acaso
 
-     useEffect(() => {
-         if (sleepStartTime) {
-             const diff = new Date() - new Date(sleepStartTime);
-             const hours = diff / (1000 * 60 * 60);
-             setHoursSlept(hours);
-         }
-     }, [sleepStartTime]);
+    useEffect(() => {
+        if (sleepStartTime) {
+            const diff = new Date() - new Date(sleepStartTime);
+            const hours = diff / (1000 * 60 * 60);
+            setHoursSlept(hours);
+        }
+    }, [sleepStartTime]);
 
-     const nightSleepLunas = Math.max(0, Math.floor(hoursSlept * 50));
-     const totalLunas = preSleepLunas + nightSleepLunas;
+    const nightSleepLunas = Math.max(0, Math.floor(hoursSlept * 50));
+    const totalLunas = preSleepLunas + nightSleepLunas;
 
      return (
          <div style={{
@@ -591,9 +591,16 @@ function MorningModal({ onSubmit, sleepStartTime, preSleepLunas }) {
                  <div style={{ fontSize: "36px", fontWeight: "400", color: "#d4af37", fontFamily: "'Playfair Display', serif" }}>
                      +{totalLunas} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>Lunas</span>
                  </div>
-                 <div style={{ fontSize: "12px", color: "#a39171", marginTop: "12px", fontFamily: "'Inter', sans-serif" }}>
-                     {preSleepLunas} pre-sleep + {nightSleepLunas} night sleep
-                 </div>
+                  <div style={{ fontSize: "12px", marginTop: "12px", fontFamily: "'Inter', sans-serif", color: "#a39171" }}>
+                      <span>{preSleepLunas} pre-sleep + {nightSleepLunas} night sleep</span>
+                      {penalized && (
+                          <div style={{ marginTop: 8 }}>
+                              <span style={{ color: "#f87171", fontWeight: 700 }}>
+                                  Penalized during pre-sleep — pre-sleep Lunas forfeited
+                              </span>
+                          </div>
+                      )}
+                  </div>
              </div>
 
             <div>
@@ -922,6 +929,7 @@ export default function HelixApp() {
                         <MorningModal
                             sleepStartTime={sleepStartTime}
                             preSleepLunas={preSleepLunas}
+                            penalized={penalized}
                             onSubmit={(energyLevel, earnedLunas) => {
                                 setLunas(c => c + earnedLunas);
 
