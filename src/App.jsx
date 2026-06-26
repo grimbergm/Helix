@@ -642,7 +642,7 @@ function ShopScreen({ Lunas, onRedeem }) {
                         fontFamily: "'Inter', sans-serif",
                         letterSpacing: "0.5px"
                     }}>
-                        Redeem your HELIX Lunas
+                        Redeem your Lunas
                     </p>
                     <CoinBadge amount={Lunas} />
                 </div>
@@ -717,7 +717,7 @@ function StatsScreen() {
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 <StatCard label="BLUE LIGHT AVOIDED" value={totalAvoided} unit="min" />
-                <StatCard label="HELIX Lunas EARNED" value={totalLunas} unit="✦" />
+                <StatCard label="Lunas EARNED" value={totalLunas} unit="✦" />
                 <StatCard label="BEST STREAK" value={streak} unit=" nights" />
                 <StatCard label="AVG ENERGY" value="3.9" unit="/5" />
             </div>
