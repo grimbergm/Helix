@@ -15,14 +15,14 @@ const BLUE_LIGHT_FACTS = [
 ];
 
 const MARKETPLACE_ITEMS = [
-    { id: 1, name: "Yoga Mat Pro", discount: "20% OFF", cost: 150, icon: "🧘", category: "Wellness", color: "#a39171" },
-    { id: 2, name: "Green Tea Bundle", discount: "FREE sample", cost: 80, icon: "🍵", category: "Nutrition", color: "#059669" },
-    { id: 3, name: "Silk Pillow", discount: "50% OFF", cost: 300, icon: "🛏️", category: "Sleep", color: "#db2777" },
-    { id: 4, name: "Lavender Mist", discount: "30% OFF", cost: 120, icon: "🌿", category: "Aromatherapy", color: "#a39171" },
-    { id: 5, name: "Herbal Snack Box", discount: "1 FREE box", cost: 200, icon: "🌰", category: "Nutrition", color: "#d97706" },
-    { id: 6, name: "Sleep Mask", discount: "40% OFF", cost: 90, icon: "😴", category: "Sleep", color: "#5d2e0a" },
-    { id: 7, name: "Meditation App", discount: "3 months FREE", cost: 250, icon: "🧠", category: "Wellness", color: "#a39171" },
-    { id: 8, name: "Blue-Light Glasses", discount: "25% OFF", cost: 180, icon: "👓", category: "Protection", color: "#0891b2" },
+    { id: 1, name: "Yoga Mat Pro", discount: "20% OFF", cost: 600, icon: "🧘", category: "Wellness", color: "#a39171" },
+    { id: 2, name: "Green Tea Bundle", discount: "FREE sample", cost: 320, icon: "🍵", category: "Nutrition", color: "#059669" },
+    { id: 3, name: "Silk Pillow", discount: "50% OFF", cost: 1200, icon: "🛏️", category: "Sleep", color: "#db2777" },
+    { id: 4, name: "Lavender Mist", discount: "30% OFF", cost: 480, icon: "🌿", category: "Aromatherapy", color: "#a39171" },
+    { id: 5, name: "Herbal Snack Box", discount: "1 FREE box", cost: 800, icon: "🌰", category: "Nutrition", color: "#d97706" },
+    { id: 6, name: "Sleep Mask", discount: "40% OFF", cost: 360, icon: "😴", category: "Sleep", color: "#5d2e0a" },
+    { id: 7, name: "Meditation App", discount: "3 months FREE", cost: 1000, icon: "🧠", category: "Wellness", color: "#a39171" },
+    { id: 8, name: "Blue-Light Glasses", discount: "25% OFF", cost: 720, icon: "👓", category: "Protection", color: "#0891b2" },
 ];
 
 const STREAK_DATA = [
@@ -842,7 +842,7 @@ export default function HelixApp() {
     const [configured, setConfigured] = useState(false);
     const [config, setConfig] = useState({ bedtime: "22:30", duration: 60 });
     const [tab, setTab] = useState("home");
-    const [coins, setCoins] = useState(420);
+    const [coins, setCoins] = useState(80);
     const [sessionActive, setSessionActive] = useState(false);
     const [sessionSeconds, setSessionSeconds] = useState(0);
     const [factIndex, setFactIndex] = useState(0);
