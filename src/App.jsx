@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Moon, Star, Coins, ShoppingBag, BarChart2, User, Flame, Zap, Award, ChevronRight, Check, ArrowLeft, Sun, Coffee, Leaf, Heart, Clock, TrendingUp, Calendar, Bell, Settings, Gift, X, Play, Pause, SkipForward, Battery, Wifi, Signal } from "lucide-react";
+import { Moon, Star, Lunas, ShoppingBag, BarChart2, User, Flame, Zap, Award, ChevronRight, Check, ArrowLeft, Sun, Coffee, Leaf, Heart, Clock, TrendingUp, Calendar, Bell, Settings, Gift, X, Play, Pause, SkipForward, Battery, Wifi, Signal } from "lucide-react";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, Tooltip, Cell } from "recharts";
 import helixLogo from "./assets/Helix_logo.jpeg";
 
@@ -31,10 +31,10 @@ const STREAK_DATA = [
     { day: "S", done: true },
 ];
 
-const WEEKLY_COINS = [
-    { day: "Mon", coins: 45 }, { day: "Tue", coins: 60 }, { day: "Wed", coins: 55 },
-    { day: "Thu", coins: 0 }, { day: "Fri", coins: 80 }, { day: "Sat", coins: 95 },
-    { day: "Sun", coins: 70 },
+const WEEKLY_Lunas = [
+    { day: "Mon", Lunas: 45 }, { day: "Tue", Lunas: 60 }, { day: "Wed", Lunas: 55 },
+    { day: "Thu", Lunas: 0 }, { day: "Fri", Lunas: 80 }, { day: "Sat", Lunas: 95 },
+    { day: "Sun", Lunas: 70 },
 ];
 
 const ENERGY_DATA = [
@@ -206,7 +206,7 @@ function CoinBadge({ amount, size = "sm" }) {
                 fontSize: isLg ? 20 : 13, fontWeight: 300,
                 color: "#d4af37", fontFamily: "'Inter', sans-serif"
             }}>{amount}</span>
-            {isLg && <span style={{ fontSize: 11, color: "#a39171", fontWeight: "500", letterSpacing: 1.5, marginLeft: "6px" }}>COINS</span>}
+            {isLg && <span style={{ fontSize: 11, color: "#a39171", fontWeight: "500", letterSpacing: 1.5, marginLeft: "6px" }}>Lunas</span>}
         </div>
     );
 }
@@ -406,7 +406,7 @@ function SetupWizard({ onComplete }) {
 }
 
 // ─── HOME SCREEN ─────────────────────────────────────────────────────────────
-function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, sessionTotal, onStop, penalized, warningVisible, factIndex }) {
+function HomeScreen({ config, Lunas, onStart, sessionActive, sessionSeconds, sessionTotal, onStop, penalized, warningVisible, factIndex }) {
     const progress = sessionActive ? 1 - (sessionSeconds / sessionTotal) : 0;
     const fact = BLUE_LIGHT_FACTS[factIndex % BLUE_LIGHT_FACTS.length];
 
@@ -477,7 +477,7 @@ function HomeScreen({ config, coins, onStart, sessionActive, sessionSeconds, ses
             }}>
                 <div style={{ fontSize: 11, color: "#a39171", letterSpacing: 2, marginBottom: 10, fontWeight: 550 }}>YOUR BALANCE
                 </div>
-                <CoinBadge amount={coins} size="lg" />
+                <CoinBadge amount={Lunas} size="lg" />
             </div>
 
             <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
@@ -559,7 +559,7 @@ function MorningModal({ onSubmit, sleepStartTime }) {
         }
     }, [sleepStartTime]);
 
-    const estimatedCoins = Math.max(1, Math.floor(hoursSlept * 50));
+    const estimatedLunas = Math.max(1, Math.floor(hoursSlept * 50));
 
     return (
         <div style={{
@@ -588,7 +588,7 @@ function MorningModal({ onSubmit, sleepStartTime }) {
                     ESTIMATED REWARD
                 </div>
                 <div style={{ fontSize: "36px", fontWeight: "400", color: "#d4af37", fontFamily: "'Playfair Display', serif" }}>
-                    +{estimatedCoins} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>HELIX COINS</span>
+                    +{estimatedLunas} <span style={{ fontSize: "16px", color: "#e5d3b3", opacity: 0.8, fontFamily: "'Inter', sans-serif" }}>HELIX Lunas</span>
                 </div>
             </div>
 
@@ -598,7 +598,7 @@ function MorningModal({ onSubmit, sleepStartTime }) {
                 </div>
                 <div style={{ display: "flex", gap: "12px", justifyContent: "center" }}>
                     {[1, 2, 3, 4, 5].map(v => (
-                        <button key={v} onClick={() => onSubmit(v, estimatedCoins)} style={{
+                        <button key={v} onClick={() => onSubmit(v, estimatedLunas)} style={{
                             width: "50px", height: "50px", borderRadius: "14px",
                             border: "1px solid rgba(163, 145, 113, 0.25)",
                             background: "rgba(44, 24, 16, 0.6)",
@@ -614,12 +614,12 @@ function MorningModal({ onSubmit, sleepStartTime }) {
 }
 
 // ─── SHOP SCREEN ─────────────────────────────────────────────────────────────
-function ShopScreen({ coins, onRedeem }) {
+function ShopScreen({ Lunas, onRedeem }) {
     const [redeemed, setRedeemed] = useState(new Set());
     const [selected, setSelected] = useState(null);
 
     const handleRedeem = (item) => {
-        if (coins >= item.cost && !redeemed.has(item.id)) {
+        if (Lunas >= item.cost && !redeemed.has(item.id)) {
             onRedeem(item.cost);
             setRedeemed(prev => new Set([...prev, item.id]));
             setSelected(null);
@@ -642,9 +642,9 @@ function ShopScreen({ coins, onRedeem }) {
                         fontFamily: "'Inter', sans-serif",
                         letterSpacing: "0.5px"
                     }}>
-                        Redeem your HELIX coins
+                        Redeem your HELIX Lunas
                     </p>
-                    <CoinBadge amount={coins} />
+                    <CoinBadge amount={Lunas} />
                 </div>
             </div>
 
@@ -690,8 +690,8 @@ function ShopScreen({ coins, onRedeem }) {
 
 // ─── STATS SCREEN ─────────────────────────────────────────────────────────────
 function StatsScreen() {
-    const totalAvoided = WEEKLY_COINS.reduce((a, b) => a + (b.coins > 0 ? 60 : 0), 0);
-    const totalCoins = WEEKLY_COINS.reduce((a, b) => a + b.coins, 0);
+    const totalAvoided = WEEKLY_Lunas.reduce((a, b) => a + (b.Lunas > 0 ? 60 : 0), 0);
+    const totalLunas = WEEKLY_Lunas.reduce((a, b) => a + b.Lunas, 0);
     const streak = 6;
 
     const StatCard = ({ label, value, unit }) => (
@@ -717,25 +717,25 @@ function StatsScreen() {
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                 <StatCard label="BLUE LIGHT AVOIDED" value={totalAvoided} unit="min" />
-                <StatCard label="HELIX COINS EARNED" value={totalCoins} unit="✦" />
+                <StatCard label="HELIX Lunas EARNED" value={totalLunas} unit="✦" />
                 <StatCard label="BEST STREAK" value={streak} unit=" nights" />
                 <StatCard label="AVG ENERGY" value="3.9" unit="/5" />
             </div>
 
-            {/* Coins Chart */}
+            {/* Lunas Chart */}
             <div style={{ background: "rgba(44, 24, 16, 0.4)", border: "1px solid rgba(163, 145, 113, 0.1)", borderRadius: "20px", padding: "20px", height: "220px", boxSizing: "border-box" }}>
                 <div style={{ fontSize: "11px", color: "#e5d3b3", opacity: "0.6", fontWeight: "500", marginBottom: "20px", letterSpacing: "1.5px", fontFamily: "'Inter', sans-serif", display: "block" }}>
-                    COINS EARNED — THIS WEEK
+                    Lunas EARNED — THIS WEEK
                 </div>
                 <div style={{ width: '100%', height: 140 }}>
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={WEEKLY_COINS}>
+                        <BarChart data={WEEKLY_Lunas}>
                             <XAxis dataKey="day" tick={{ fill: "#e5d3b3", fontSize: "11px", fontFamily: "'Inter', sans-serif", opacity: 0.6 }} axisLine={false} tickLine={false} />
                             <YAxis hide />
                             <Tooltip cursor={{ fill: 'rgba(163, 145, 113, 0.05)' }} contentStyle={{ background: "#1a0f0a", border: "1px solid #a39171", borderRadius: 10 }} itemStyle={{ color: "#e5d3b3" }} />
-                            <Bar dataKey="coins" radius={[4, 4, 0, 0]}>
-                                {WEEKLY_COINS.map((entry, i) => (
-                                    <Cell key={i} fill={entry.coins > 0 ? "#a39171" : "rgba(163, 145, 113, 0.1)"} />
+                            <Bar dataKey="Lunas" radius={[4, 4, 0, 0]}>
+                                {WEEKLY_Lunas.map((entry, i) => (
+                                    <Cell key={i} fill={entry.Lunas > 0 ? "#a39171" : "rgba(163, 145, 113, 0.1)"} />
                                 ))}
                             </Bar>
                         </BarChart>
@@ -767,11 +767,11 @@ function StatsScreen() {
 }
 
 // ─── PROFILE SCREEN ──────────────────────────────────────────────────────────
-function ProfileScreen({ coins, onReset }) {
+function ProfileScreen({ Lunas, onReset }) {
     const rows = [
         { icon: "🏆", label: "Level", value: "Lunar Apprentice", color: "#e5d3b3" },
         { icon: "🌙", label: "Total Nights", value: "24", color: "#a39171" },
-        { icon: "✦", label: "Lifetime Coins", value: "1,840", color: "#fbbf24" },
+        { icon: "✦", label: "Lifetime Lunas", value: "1,840", color: "#fbbf24" },
         { icon: "🔥", label: "Best Streak", value: "9 nights", color: "#f97316" },
     ];
     return (
@@ -793,7 +793,7 @@ function ProfileScreen({ coins, onReset }) {
                         letterSpacing: "1px",
                         opacity: "0.6" }}>Joined May 2025</p>
                 </div>
-                <CoinBadge amount={coins} size="lg" />
+                <CoinBadge amount={Lunas} size="lg" />
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
@@ -842,7 +842,7 @@ export default function HelixApp() {
     const [configured, setConfigured] = useState(false);
     const [config, setConfig] = useState({ bedtime: "22:30", duration: 60 });
     const [tab, setTab] = useState("home");
-    const [coins, setCoins] = useState(80);
+    const [Lunas, setLunas] = useState(80);
     const [sessionActive, setSessionActive] = useState(false);
     const [sessionSeconds, setSessionSeconds] = useState(0);
     const [factIndex, setFactIndex] = useState(0);
@@ -903,8 +903,8 @@ export default function HelixApp() {
                     {tab === "home" && !sessionActive && sleepStartTime && (
                         <MorningModal
                             sleepStartTime={sleepStartTime}
-                            onSubmit={(energyLevel, earnedCoins) => {
-                                setCoins(c => c + earnedCoins);
+                            onSubmit={(energyLevel, earnedLunas) => {
+                                setLunas(c => c + earnedLunas);
 
                                 setSleepStartTime(null);
                             }}
@@ -917,14 +917,14 @@ export default function HelixApp() {
                     }}>
                         {tab === "home" && (
                             <HomeScreen
-                                config={config} coins={coins} onStart={handleStart} sessionActive={sessionActive}
+                                config={config} Lunas={Lunas} onStart={handleStart} sessionActive={sessionActive}
                                 sessionSeconds={sessionSeconds} sessionTotal={sessionTotal} onStop={handleStop}
                                 penalized={penalized} factIndex={factIndex}
                             />
                         )}
-                        {tab === "shop" && <ShopScreen coins={coins} onRedeem={(cost) => setCoins(c => c - cost)} />}
+                        {tab === "shop" && <ShopScreen Lunas={Lunas} onRedeem={(cost) => setLunas(c => c - cost)} />}
                         {tab === "stats" && <StatsScreen />} {/* 🌟 Stats queda limpio y desacoplado */}
-                        {tab === "profile" && <ProfileScreen coins={coins} onReset={() => setConfigured(false)} />}
+                        {tab === "profile" && <ProfileScreen Lunas={Lunas} onReset={() => setConfigured(false)} />}
                     </div>
                     <TabBar active={tab} onChange={setTab} />
                 </>
