@@ -889,9 +889,15 @@ export default function HelixApp() {
      const handleStop = () => {
          if (sessionActive && sessionSeconds !== undefined) {
              // Calculate how long they did the routine (1 Luna per minute)
-             const secondsCompleted = sessionTotal - sessionSeconds;
-             const minutesCompleted = Math.floor(secondsCompleted / 60);
-             setPreSleepLunas(minutesCompleted);
+             // But only if they weren't penalized for using their phone
+             if (!penalized) {
+                 const secondsCompleted = sessionTotal - sessionSeconds;
+                 const minutesCompleted = Math.floor(secondsCompleted / 60);
+                 setPreSleepLunas(minutesCompleted);
+             } else {
+                 // If penalized, they get no pre-sleep Lunas
+                 setPreSleepLunas(0);
+             }
          }
          setSessionActive(false);
      };
@@ -921,6 +927,7 @@ export default function HelixApp() {
 
                                 setSleepStartTime(null);
                                 setPreSleepLunas(0);
+                                resetPenalty();
                             }}
                         />
                     )}
